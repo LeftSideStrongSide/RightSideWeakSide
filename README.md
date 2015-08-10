@@ -1,1 +1,1 @@
-# RightSideWeakSide
+An adlister with an irrelevant name.
