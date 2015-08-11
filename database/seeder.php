@@ -13,30 +13,31 @@
 			'username' => 'Zakkyzebra',
 			'item_name' => 'Large black hawk',
 			'description' => 'A hawk of massive proportions. Color: black',
-			'price' => 3.50,
-			'image_url' => "../public/img/adImg0.png"
-		],[
+			'price' => '3.50',
+			'image_url' => '../public/img/adImg0.png'
+		],
+		[
 			'username' => 'AlissaBelissa',
 			'item_name' => 'pudding',
 			'description' => 'Some bland chocolate pudding',
-			'price' => 5.00,
-			'image_url' => "../public/img/adImg1.png"
-		],[
+			'price' => '5.00',
+			'image_url' => '../public/img/adImg1.png'
+		],
+		[
 			'username' => 'AngryDuck',
 			'item_name' => 'Cups',
 			'description' => 'Cups.',
-			'price' => 1.50,
-			'image_url' => "../public/img/adImg2.png"
+			'price' => '1.50',
+			'image_url' => '../public/img/adImg2.png'
 		]
 	);
 
-	$query = "	INSERT INTO ads (username, item_name, description, price, image_url) 
-				VALUES 			(:username, :item_name, :description, :price, :img_url)";
+	$query = "INSERT INTO ads (username, item_name, description, price, image_url) VALUES (:username, :item_name, :description, :price, :image_url)";
 
     $stmt = $dbc->prepare($query);
 
 	foreach ($ads as $ad) {
-			$stmt->bindValue(':username', $ad['username'], PDO::PARAM_INT);
+			$stmt->bindValue(':username', $ad['username'], PDO::PARAM_STR);
 			$stmt->bindValue(':item_name', $ad['item_name'], PDO::PARAM_STR);
 			$stmt->bindValue(':description', $ad['description'], PDO::PARAM_STR);
 			$stmt->bindValue(':price', $ad['price'], PDO::PARAM_STR);
@@ -54,32 +55,32 @@
 		[
 			'username' => 'Zakkyzebra',
 			'password' => 'Large black hawk',
-			'profile_picture' => "../public/img/adImg0.png"
+			'profile_picture' => 'A hawk of massive proportions. Color: black'
 		],
 		[
 			'username' => 'AlissaBelissa',
-			'password' => 'k',
-			'profile_picture' => "../public/img/adImg1.png"
+			'password' => 'pudding',
+			'profile_picture' => 'Some bland chocolate pudding'
 		],
 		[
-			'username' => 'billy',
-			'password' => 'bob',
-			'profile_picture' => "../public/img/adImg2.png"
+			'username' => 'AngryDuck',
+			'password' => 'Cups',
+			'profile_picture' => 'Cups.'
 		]
 	);
 
-	$query = "	INSERT INTO ads (username, password, profile_picture);
-				VALUES 			(:username, :password, :profile_picture)";
+	$query = "INSERT INTO profiles (username, password, profile_picture) VALUES (:username, :password, :profile_picture)";
 
     $stmt = $dbc->prepare($query);
 
 	foreach ($profiles as $profile) {
-			$stmt->bindValue(':username', $ad['username'], PDO::PARAM_INT);
-			$stmt->bindValue(':password', $ad['password'], PDO::PARAM_STR);
-			$stmt->bindValue(':profile_picture', $ad['profile_picture'], PDO::PARAM_STR);
-		    $stmt->execute();
+		print_r($profile);
+			$stmt->bindValue(':username', $profile['username'], PDO::PARAM_STR);
+			$stmt->bindValue(':password', $profile['password'], PDO::PARAM_STR);
+			$stmt->bindValue(':profile_picture', $profile['profile_picture'], PDO::PARAM_STR);
+			$stmt->execute();
 
-		    echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
+		 //    echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
 	}
 
 
