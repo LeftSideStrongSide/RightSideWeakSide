@@ -17,6 +17,8 @@
 				if(hash("sha256",$_POST['password']) === $stmtX['password']){
 					$_SESSION['loggedIn'] = true;
 					$_SESSION['email'] = $_POST['email'];
+				}else{
+					echo "<span class='red'>Username and password combination does not match.";
 				}
 			}
 		}
@@ -48,19 +50,19 @@
 			    $stmt = $dbc->prepare($query);	
 			    try{
 			    	Input::getUsername($username);
-			    	$stmt->bindValue(':username', $_POST['username'], PDO::PARAM_STR);
+			    	$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 			    }catch(Exception $e){
 			    	$errors[] = $e->getMessage();
 			    }
 				try{
 					Input::getEmail($email);
-				    $stmt->bindValue(':email',  $_POST['email'],  PDO::PARAM_STR);
+				    $stmt->bindValue(':email',  $email,  PDO::PARAM_STR);
 			    }catch(Exception $e){
 					$errors[] = $e->getMessage();
 				}
 				try{
 					Input::checkPassword($password, $confirmPassword);
-				    $stmt->bindValue(':password',  Input::getString('password'),  PDO::PARAM_STR);
+				    $stmt->bindValue(':password',  $password,  PDO::PARAM_STR);
 			    }catch(Exception $e){
 					$errors[] = $e->getMessage();
 				}

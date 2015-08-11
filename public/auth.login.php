@@ -1,4 +1,7 @@
 <?php 
+	var_dump($_POST);
+	include '../utils/Auth.php';
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +59,9 @@
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 	}
+	.red{
+		color: red;
+	}
 	</style>
 </head>
 
@@ -63,14 +69,22 @@
 
 	<div class="container">
 
-		<form class="form-signin">
+		<form class="form-signin" method="POST">
+		<?
+			if(!empty($_POST['login'])){
+				Auth::login();
+				if($_SESSION['loggedIn'] === true){
+					header('Location: index.php');
+				}
+			}
+		?>
 			<h2 class="form-signin-heading">Adlister Login</h2>
 			<label for="inputEmail" class="sr-only">Email address</label>
-			<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+			<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 			<label for="inputPassword" class="sr-only">Password</label>
-			<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+			<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 			<p><a href="users.create.php">Not a user? Create an account</a></p>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" name="login" value="login" type="submit">Sign in</button>
 		</form>
 
 	</div> <!-- /container -->

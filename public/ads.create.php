@@ -7,7 +7,7 @@
 	require '../database/db_connect.php';
 	require_once '../utils/Input.php';
 
-$_SESSION['username'] = 'testuser';
+
 $errors = array();
 //add item name, price, and description
 $newAd = $dbc->prepare('INSERT INTO ads (username, item_name, description, price, image_url) VALUES (:username, :item_name, :description, :price, :image_url)');

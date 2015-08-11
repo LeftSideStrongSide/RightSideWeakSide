@@ -121,5 +121,6 @@ class Input
     // later in the curriculum.                                              //
     ///////////////////////////////////////////////////////////////////////////
     private function __construct() {}
+}
 
 ?>
