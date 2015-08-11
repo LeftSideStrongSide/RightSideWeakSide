@@ -2,6 +2,7 @@
 	var_dump($_POST);
 	include '../utils/Auth.php';
 	session_start();
+	$_SESSION = [];
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +74,7 @@
 		<?
 			if(!empty($_POST['login'])){
 				Auth::login();
-				if($_SESSION['loggedIn'] === true){
+				if(!empty($_SESSION['loggedIn'])){
 					header('Location: index.php');
 				}
 			}
