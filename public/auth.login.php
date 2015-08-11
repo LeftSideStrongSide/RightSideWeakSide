@@ -1,8 +1,6 @@
 <?php 
-	var_dump($_POST);
 	include '../utils/Auth.php';
 	session_start();
-	$_SESSION = [];
 ?>
 
 <!DOCTYPE html>
