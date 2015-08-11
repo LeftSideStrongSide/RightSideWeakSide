@@ -27,8 +27,10 @@ $createProfilesTable =
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL,
     password VARCHAR(500) NOT NULL,
+    email VARCHAR(200) NOT NULL,
     profile_picture VARCHAR(500) NOT NULL,
     PRIMARY KEY (id),
+    UNIQUE KEY email (email),
 	UNIQUE KEY username (username))';
 // Run query, if there are errors they will be thrown as PDOExceptions
 $dbc->exec($createProfilesTable);

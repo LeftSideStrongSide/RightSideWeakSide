@@ -55,21 +55,24 @@
 		[
 			'username' => 'Zakkyzebra',
 			'password' => 'Large black hawk',
-			'profile_picture' => '../public/#.png'
+			'profile_picture' => '../public/#.png',
+			'email' => 'zachattack@gmail.com'
 		],
 		[
 			'username' => 'AlissaBelissa',
 			'password' => 'pudding',
-			'profile_picture' => '../public/#.png'
+			'profile_picture' => '../public/#.png',
+			'email' => 'alissa.stephens1@gmail.com'
 		],
 		[
 			'username' => 'AngryDuck',
 			'password' => 'Cups',
-			'profile_picture' => '../public/#.png'
+			'profile_picture' => '../public/#.png',
+			'email' => 'angryducks@gmail.com'
 		]
 	);
 
-	$query = "INSERT INTO profiles (username, password, profile_picture) VALUES (:username, :password, :profile_picture)";
+	$query = "INSERT INTO profiles (username, password, profile_picture, email) VALUES (:username, :password, :profile_picture, :email)";
 
     $stmt = $dbc->prepare($query);
 
@@ -77,6 +80,7 @@
 			$stmt->bindValue(':username', $profile['username'], PDO::PARAM_STR);
 			$stmt->bindValue(':password', $profile['password'], PDO::PARAM_STR);
 			$stmt->bindValue(':profile_picture', $profile['profile_picture'], PDO::PARAM_STR);
+			$stmt->bindValue(':email', $profile['email'], PDO::PARAM_STR);
 			$stmt->execute();
 		    echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
 	}
