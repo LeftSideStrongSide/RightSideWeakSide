@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Project name</a>
+      <a class="navbar-brand" href="#">Adlister</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -27,6 +27,10 @@
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#users.show.php">Profile</a></li>
+        <li><a href="#auth.logout.php">Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
