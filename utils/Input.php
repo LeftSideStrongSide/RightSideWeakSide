@@ -1,6 +1,4 @@
 <?php
-
-
 class Input
 {
     public static function getString($key, $min = 1, $max = 255 )
@@ -23,26 +21,40 @@ class Input
         }
         
     }
-    // public static function getDate($key)
-    // {
-    //     $date = Input::get($key);
-    //     $dateArray = explode("-", $date);
+    public static function getUsername($key)
+    {
+        require '../database/db_connect.php';
+        $query = "SELECT * FROM profiles WHERE username = '" . $key . "'";
+        $stmt = $dbc->query($query);
+        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($stmtX['username'] === $key) {
+            throw new Exception("Username is already in use.");
+        }
 
-    //     //(checkdate($d,$m,$y));
-    //     if(checkdate((int)$dateArray[1], (int)$dateArray[2], (int)$dateArray[0])) {
-    //         return $date;
-    //     }
-    //     else {
-    //         throw new Exception($date . ' is not a valid date.');
-    //     }
-        
-    // }
+    }
+
+    public static function getEmail($key)
+    {
+        require '../database/db_connect.php';
+        $query = "SELECT * FROM profiles WHERE email = '" . $key . "'";
+        $stmt = $dbc->query($query);
+        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($stmtX['email'] === $key) {
+            throw new Exception("Email is already in use.");
+        }
+    }
+
+    public static function checkPassword($key, $confirmKey)
+    {
+        if ($key !== $confirmKey) {
+            throw new Exception("Passwords do not match.");
+        }
+    }
 
     public static function getDate($key)
     {
         $value = Input::get($key);
         $format = 'Y-m-d';
-
         $dateObject = DateTime::createFromFormat($format, $value);
         if($dateObject) {
             $dateString = $dateObject->format($format);
@@ -50,7 +62,6 @@ class Input
         } else {
             throw new Exception($value . ' is not a valid date.');
         }
-
     }
     public static function getNumber($key, $min = 1, $max = 9999999999.99 )
     {
@@ -86,7 +97,6 @@ class Input
         return false;
        }
     }
-
     /**
      * Get a requested value from either $_POST or $_GET
      *
@@ -97,13 +107,13 @@ class Input
     public static function get($key, $default = null)
     {
         if (isset($_REQUEST[$key])){
+            return trim($_REQUEST[$key]);
             return strip_tags(trim($_REQUEST[$key]));
         }
         else{
             return $default;
         }
     }
-
     ///////////////////////////////////////////////////////////////////////////
     //                      DO NOT EDIT ANYTHING BELOW!!                     //
     // The Input class should not ever be instantiated, so we prevent the    //
@@ -111,4 +121,5 @@ class Input
     // later in the curriculum.                                              //
     ///////////////////////////////////////////////////////////////////////////
     private function __construct() {}
-}
+
+?>

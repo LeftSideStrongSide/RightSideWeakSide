@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?	
 	session_start();
+	if(!$_SESSION['loggedIn']){ 
+		header('Location: auth.login.php');
+	}
 	require '../utils/Auth.php';
 	require '../database/db_connect.php';
 ?>
@@ -46,32 +49,9 @@
 	code {
 	  font-size: 80%;
 	}
-	.whereAmI{
-		margin-top: 100px;
-	}
 </style>
 </head>
 <body>
-<?
-	if(!empty($_POST['submit'])){
-		Auth::login();
-	}
-	if(!empty($_POST['logout'])){
-		Auth::logout();
-	}
-?>
-<!-- SIMPLE LOGIN FORM FOR TESTING-->
-<form method="POST" class="whereAmI">
-	<? if (empty($_SESSION['loggedIn'])){
-		echo '<input type="text" name="username" placeholder="Username">
-		<input type="text" name="password" placeholder="Password">
-		<input type="submit" name="submit" value="Submit">';
-	}elseif (!empty($_SESSION['loggedIn'])) {
-		echo '<input type="submit" name="logout" value="Logout">';
-	}
-	?>
-</form>
-<?var_dump($_SESSION);?>
 <!-- jquery  -->
 <script src="/js/jquery.js"></script>
 	<?php include '../views/partials/navbar.php'; ?>
