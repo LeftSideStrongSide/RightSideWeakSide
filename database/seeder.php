@@ -74,18 +74,10 @@
     $stmt = $dbc->prepare($query);
 
 	foreach ($profiles as $profile) {
-		print_r($profile);
 			$stmt->bindValue(':username', $profile['username'], PDO::PARAM_STR);
 			$stmt->bindValue(':password', $profile['password'], PDO::PARAM_STR);
 			$stmt->bindValue(':profile_picture', $profile['profile_picture'], PDO::PARAM_STR);
 			$stmt->execute();
-
-		 //    echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
+		    echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
 	}
-
-
-	
-
-
-
 ?>
