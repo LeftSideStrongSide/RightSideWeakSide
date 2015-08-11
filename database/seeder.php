@@ -14,21 +14,21 @@
 			'item_name' => 'Large black hawk',
 			'description' => 'A hawk of massive proportions. Color: black',
 			'price' => '3.50',
-			'image_url' => '../public/img/adImg0.png'
+			'image_url' => '../public/#.png'
 		],
 		[
 			'username' => 'AlissaBelissa',
 			'item_name' => 'pudding',
 			'description' => 'Some bland chocolate pudding',
-			'price' => '5.00',
-			'image_url' => '../public/img/adImg1.png'
+			'price' => '25.00',
+			'image_url' => '../public/#.png'
 		],
 		[
 			'username' => 'AngryDuck',
 			'item_name' => 'Cups',
 			'description' => 'Cups.',
 			'price' => '1.50',
-			'image_url' => '../public/img/adImg2.png'
+			'image_url' => '../public/#.png'
 		]
 	);
 
@@ -55,17 +55,17 @@
 		[
 			'username' => 'Zakkyzebra',
 			'password' => 'Large black hawk',
-			'profile_picture' => 'A hawk of massive proportions. Color: black'
+			'profile_picture' => '../public/#.png'
 		],
 		[
 			'username' => 'AlissaBelissa',
 			'password' => 'pudding',
-			'profile_picture' => 'Some bland chocolate pudding'
+			'profile_picture' => '../public/#.png'
 		],
 		[
 			'username' => 'AngryDuck',
 			'password' => 'Cups',
-			'profile_picture' => 'Cups.'
+			'profile_picture' => '../public/#.png'
 		]
 	);
 
