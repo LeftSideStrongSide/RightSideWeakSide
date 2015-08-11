@@ -1,4 +1,5 @@
 <?php 
+	include '../utils/Auth.php';
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +65,8 @@
 <body>
 
 	<div class="container">
-
-		<form class="form-signin">
+<?var_dump($_POST);?>
+		<form method="POST" class="form-signin">
 			<h2 class="form-signin-heading">Create a New User</h2>
 			<label for="username" class="sr-only">Username</label>
 			<input type="text" id="username" class="form-control" placeholder="Username" name='username' required autofocus>
@@ -75,7 +76,7 @@
 			<input type="password" id="inputPassword" class="form-control" placeholder="Password" name='password' required>
 			<label for="confirmPassword" class="sr-only">Confirm Password</label>
 			<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" name='confirmPassword' required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" name="userCreate" value="Submit" type="submit">Sign in</button>
 		</form>
 
 	</div> <!-- /container -->
