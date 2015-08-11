@@ -4,6 +4,7 @@
 	define("DB_NAME", 'adlister_db');
 	define("DB_USER", 'adlister_user');
 	define("DB_PASS", '');
+	include 'Input.php';
 	class Auth{
 		public static function login()
 		{
@@ -35,40 +36,45 @@
 
 		public static function newUser()
 		{
-			if(!empty($_POST['#'])){
+			if(!empty($_POST['userCreate'])){
 				require '../database/db_connect.php';
 
 				$username = trim($_POST['username']);
-				$passwordA = hash("sha256",trim($_POST['password']));
-				$passwordB = hash("sha256",trim($_POST['confirmPassword']));
+				$password = hash("sha256",trim($_POST['password']));
+				$confirmPassword = hash("sha256",trim($_POST['confirmPassword']));
 				$email = trim($_POST['email']);
 
 				$query = "INSERT INTO profiles (username, password, email, profile_picture) VALUES (:username, :password, :email, :profile_picture)";
-			    $stmt = $dbc->prepare($query);				
+			    $stmt = $dbc->prepare($query);	
 			    try{
-				    $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+			    	Input::getUsername($username);
+			    	$stmt->bindValue(':username', $_POST['username'], PDO::PARAM_STR);
 			    }catch(Exception $e){
-			    	echo "Username is already taken.";
+			    	$errors[] = $e->getMessage();
 			    }
-			    if($passwordA === $passwordB){
-			    	try{
-			    		$stmt->bindValue(':password', $passwordA, PDO::PARAM_STR);
-			    	}catch(Exception $e){
-			    		echo "Password is not valid.";
-			    	}
-			    }
-			    try{
-			    	$stmt->bindValue(':email', $email, PDO::PARAM_STR);
+				try{
+					Input::getEmail($email);
+				    $stmt->bindValue(':email',  $_POST['email'],  PDO::PARAM_STR);
 			    }catch(Exception $e){
-			    	echo "Email is not valid.";
-			    }
-			    try{
-			    	$stmt->execute();
+					$errors[] = $e->getMessage();
+				}
+				try{
+					Input::checkPassword($password, $confirmPassword);
+				    $stmt->bindValue(':password',  Input::getString('password'),  PDO::PARAM_STR);
 			    }catch(Exception $e){
-			    	echo "An error has occured. Please try again later.";
+					$errors[] = $e->getMessage();
+				}
+			    $stmt->bindValue(':profile_picture', "image.png", PDO::PARAM_STR);
+			    if(empty($errors)){
+			    	$_SESSION['loggedIn'] = true;
+			    	$_SESSION['username'] = $username;
+			    	var_dump($_SESSION);
+				    $stmt->execute();
+				    header('Location: index.php');
+				    exit();
+			    }else{
+			    	return $errors;
 			    }
-
-
 			}
 		}
 	}

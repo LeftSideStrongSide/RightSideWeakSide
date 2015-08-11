@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	include '../utils/Auth.php';
 ?>
 
@@ -59,13 +60,27 @@
 	#confirmPassword{
 		margin-bottom: 20px;
 	}
+	.red{
+		color: red;
+	}
 	</style>
 </head>
 
 <body>
 
 	<div class="container">
-<?var_dump($_POST);?>
+<?
+var_dump($_POST);
+if(!empty($_POST['userCreate'])){
+	$errors = Auth::newUser();
+	var_dump($errors);
+	if(!empty($errors)){
+		foreach ($errors as $error) {
+			echo "<p><span class='red'>$error</span></p>";
+		}
+	}
+}
+?>
 		<form method="POST" class="form-signin">
 			<h2 class="form-signin-heading">Create a New User</h2>
 			<label for="username" class="sr-only">Username</label>
