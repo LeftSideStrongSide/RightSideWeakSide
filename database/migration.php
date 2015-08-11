@@ -26,7 +26,7 @@ $createProfilesTable =
 	'CREATE TABLE profiles (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(500) NOT NULL,
     profile_picture VARCHAR(500) NOT NULL,
     PRIMARY KEY (id),
 	UNIQUE KEY username (username))';
