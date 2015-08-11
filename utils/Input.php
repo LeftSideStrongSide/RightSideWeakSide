@@ -21,7 +21,6 @@ class Input
         }
         
     }
-
     public static function getUsername($key)
     {
         require '../database/db_connect.php';
@@ -51,19 +50,7 @@ class Input
             throw new Exception("Passwords do not match.");
         }
     }
-    // public static function getDate($key)
-    // {
-    //     $date = Input::get($key);
-    //     $dateArray = explode("-", $date);
-    //     //(checkdate($d,$m,$y));
-    //     if(checkdate((int)$dateArray[1], (int)$dateArray[2], (int)$dateArray[0])) {
-    //         return $date;
-    //     }
-    //     else {
-    //         throw new Exception($date . ' is not a valid date.');
-    //     }
-        
-    // }
+
     public static function getDate($key)
     {
         $value = Input::get($key);
@@ -121,6 +108,7 @@ class Input
     {
         if (isset($_REQUEST[$key])){
             return trim($_REQUEST[$key]);
+            return strip_tags(trim($_REQUEST[$key]));
         }
         else{
             return $default;
@@ -133,4 +121,5 @@ class Input
     // later in the curriculum.                                              //
     ///////////////////////////////////////////////////////////////////////////
     private function __construct() {}
-}
+
+?>
