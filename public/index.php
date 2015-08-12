@@ -4,7 +4,7 @@
 	if(!$_SESSION['loggedIn']){ 
 		header('Location: auth.login.php');
 	}
-	require '../utils/Auth.php';
+	require '../bootstrap.php';
 ?>
 <html lang="en">
 <head>
@@ -38,9 +38,6 @@
 	body > .container {
 	  padding: 60px 15px 0;
 	}
-	main {
-		margin: 10%;
-	}
 	.container .text-muted {
 	  margin: 20px 0;
 	}
@@ -57,7 +54,11 @@
 	<?php include '../views/partials/navbar.php'; ?>
 	<?php include '../views/partials/header.php'; ?>
 	<main>
-		<?php include 'ads.index.php'; ?>
+		<div id="ads" class="row">
+		    <div class="col-sm-offset-1 col-sm-10">
+				<?php include 'ads.index.php'; ?> 
+		    </div><!--/"col-sm-10-->
+		</div><!--/row-->
 	</main>
 	<?php include '../views/partials/footer.php'; ?>
 <!-- jquery  -->

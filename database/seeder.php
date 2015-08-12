@@ -1,7 +1,6 @@
 <?
 
-	require_once '../models/Ads.php';
-	require_once '../models/Profiles.php';
+	require_once '../bootstrap.php';
 
 	$ads = array
 	(
@@ -10,21 +9,21 @@
 			'item_name' => 'Large black hawk',
 			'description' => 'A hawk of massive proportions. Color: black',
 			'price' => '3.50',
-			'image_url' => '../public/#.png'
+			'image_url' => 'img/uploads/ctrl_escape.png'
 		],
 		[
 			'username' => 'AlissaBelissa',
 			'item_name' => 'pudding',
 			'description' => 'Some bland chocolate pudding',
 			'price' => '25.00',
-			'image_url' => '../public/#.png'
+			'image_url' => 'img/uploads/chameleon.jpg'
 		],
 		[
 			'username' => 'AngryDuck',
 			'item_name' => 'Cups',
 			'description' => 'Cups.',
 			'price' => '1.50',
-			'image_url' => '../public/#.png'
+			'image_url' => 'img/uploads/oranges.png'
 		]
 	);
 
@@ -43,19 +42,19 @@
 		[
 			'username' => 'Zakkyzebra',
 			'password' => 'Large black hawk',
-			'profile_picture' => '../public/#.png',
+			'profile_picture' => 'img/uploads/giraffe.jpg',
 			'email' => 'zachattack@gmail.com'
 		],
 		[
 			'username' => 'AlissaBelissa',
 			'password' => 'pudding',
-			'profile_picture' => '../public/#.png',
+			'profile_picture' => 'img/uploads/giraffe.jpg',
 			'email' => 'alissa.stephens1@gmail.com'
 		],
 		[
 			'username' => 'AngryDuck',
 			'password' => 'Cups',
-			'profile_picture' => '../public/#.png',
+			'profile_picture' => 'img/uploads/giraffe.jpg',
 			'email' => 'angryducks@gmail.com'
 		]
 	);
