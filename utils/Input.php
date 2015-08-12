@@ -1,5 +1,6 @@
 <?php
-class Input
+include '../models/BaseModel.php';
+class Input extends BaseModel
 {
     public static function getString($key, $min = 1, $max = 255 )
     {
@@ -23,7 +24,7 @@ class Input
     }
     public static function getUsername($key)
     {
-        require '../database/db_connect.php';
+        BaseModel::dbConnect();
         $query = "SELECT * FROM profiles WHERE username = '" . $key . "'";
         $stmt = $dbc->query($query);
         $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
