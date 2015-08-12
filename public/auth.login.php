@@ -1,6 +1,6 @@
 <?php 
-	include '../utils/Auth.php';
 	session_start();
+	include '../bootstrap.php';
 	if(!empty($_SESSION['loggedIn'])){
 		header('Location: index.php');
 	}
@@ -74,7 +74,7 @@
 		<form class="form-signin" method="POST">
 		<?
 			if(!empty($_POST['login'])){
-				Auth::login();
+				Profiles::login();
 				if(!empty($_SESSION['loggedIn'])){
 					header('Location: index.php');
 				}

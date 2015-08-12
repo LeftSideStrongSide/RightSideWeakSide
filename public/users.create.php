@@ -1,7 +1,6 @@
 <?php 
 	session_start();
-	include '../utils/Auth.php';
-	include '../models/Profiles.php';
+	require_once '../bootstrap.php';
 	if(!empty($_SESSION['loggedIn'])){
 		header('Location: index.php');
 	}
@@ -76,7 +75,7 @@
 <?
 var_dump($_POST);
 if(!empty($_POST['userCreate'])){
-	$errors = Profiles::insert();
+	$errors = Auth::newUser();
 	var_dump($errors);
 	if(!empty($errors)){
 		foreach ($errors as $error) {
