@@ -60,12 +60,13 @@
 		]
 	);
 
-	foreach ($profiles as $profile)
+	foreach ($profiles as $profile){
 		$newProfile = new Profiles();
 		$newProfile->username = $profile['username'];
-		$newProfile->password = $profile['item_name'];
-		$newProfile->profile_picture = $profile['description'];
-		$newProfile->email = $profile['price'];
+		$newProfile->password = $profile['password'];
+		$newProfile->profile_picture = $profile['profile_picture'];
+		$newProfile->email = $profile['email'];
 		$newProfile->save();
+	}
 
 ?>

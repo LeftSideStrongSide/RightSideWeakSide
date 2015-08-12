@@ -28,7 +28,7 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 	}catch(Exception $e){
 		$errors[] = $e->getMessage();
 	}
-	if(!empty(basename($_FILES['image_url']['name']))) {
+	if(!empty(basename($_FILES['image_url']['name'])) && empty($errors)) {
 	    $uploads_directory = 'img/uploads/';
 	    $filename = $uploads_directory . basename($_FILES['image_url']['name']);
 	    if (move_uploaded_file($_FILES['image_url']['tmp_name'], $filename)) {
@@ -73,6 +73,9 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 </head>
 <body>
 	<h1>Create an Ad</h1>
+	<?php foreach($errors as $error): ?>
+		<p><?= $error ?></p>
+	<?php endforeach; ?>
 	<form method = "POST" action="ads.create.php" enctype="multipart/form-data" role="form">
 		<div class="form-group">
 			<div class="col-md-4">
