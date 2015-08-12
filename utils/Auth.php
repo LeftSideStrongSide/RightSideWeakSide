@@ -1,42 +1,11 @@
 <?
-	require_once '../models/BaseModel.php';
-	require_once 'Input.php';
-	class Auth extends BaseModel
+	require_once '../models/Profiles.php';
+	class Auth
 	{
-		public static function login()
-		{
-			if(!empty($_POST['email'])){
-				BaseModel::dbConnect();
-
-				$query = "SELECT * FROM profiles WHERE email = '" . $_POST['email'] . "'";
-				$stmt = self::$dbc->query($query);
-				$stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
-				if(hash("sha256",$_POST['password']) === $stmtX['password']){
-					$_SESSION['loggedIn'] = true;
-					$_SESSION['email'] = $_POST['email'];
-				}else{
-					echo "<span class='red'>Username and password combination does not match.</span>";
-				}
-			}
-		}
-		
-		public static function logout()
-		{
-		    $_SESSION = array();
-		    if (ini_get("session.use_cookies")) {
-		        $params = session_get_cookie_params();
-		        setcookie(session_name(), '', time() - 42000,
-		            $params["path"], $params["domain"],
-		            $params["secure"], $params["httponly"]
-		        );
-		    }
-		    session_destroy();
-		}
 
 		public static function changePassword()
 		{
 			if(!empty($_POST['changePassword'])){
-				require '../database/db_connect.php';
 				$oldPassword = hash("sha256",trim($_POST['oldPassword']));
 				$password = hash("sha256",trim($_POST['newPassword']));
 				$confirmPassword = hash("sha256",trim($_POST['confirmNewPassword']));
@@ -76,21 +45,36 @@
 			$email = trim($_POST['email']);
 			$password = trim($_POST['password']);
 			$confirmPassword = trim($_POST['confirmPassword']);
+			$profiles = new Profiles();
 			try{
-				Input::getUsername($username);
+				Profiles::getUsername($username);
 			}catch(Exception $e){
 				$errors[] = $e->getMessage();
 			}
 			try{
-				Input::getEmail($email);
+				Profiles::getEmail($email);
 			}catch(Exception $e){
 				$errors[] = $e->getMessage();
 			}
 			try{
-				Input::checkPassword($password, $confirmPassword);
+				Profiles::checkPassword($password, $confirmPassword);
 			}catch(Exception $e){
 				$errors[] = $e->getMessage();
 			}
+		    if(empty($errors)){
+
+				$profiles->username = $username;
+				$profiles->email = $email;
+				$profiles->password = hash("sha256", $password);
+				$profiles->profile_picture = "#.png";
+			    $stmt->execute();
+		    }else{
+		    	return $errors;
+		    }
+			$profiles->save();
+			$_SESSION['loggedIn'] = true;
+			$_SESSION['email'] = $email;
+			header('Location: index.php'); 
 		}
 	}
 

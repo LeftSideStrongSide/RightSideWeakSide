@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	include '../utils/Auth.php';
+	require_once '../bootstrap.php';
 	if(!empty($_SESSION['loggedIn'])){
 		header('Location: index.php');
 	}
