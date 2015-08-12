@@ -4,7 +4,12 @@ define('DB_NAME', 'adlister_db');
 define('DB_USER', 'adlister_user');
 define('DB_PASS', '');
 
-require_once 'db_connect.php';
+// Get new instance of PDO object
+$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+// Tell PDO to throw exceptions on error
+$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//echo out the status
+//echo $dbc->getAttribute(PDO::ATTR_CONNECTION_STATUS) . "\n";
 
 // delete table if exists
 $dbc->exec('DROP TABLE IF EXISTS `ads`');

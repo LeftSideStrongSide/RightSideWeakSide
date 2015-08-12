@@ -1,11 +1,7 @@
 <?
-	define("DB_HOST", '127.0.0.1');
-	define("DB_NAME", 'adlister_db');
-	define("DB_USER", 'adlister_user');
-	define("DB_PASS", '');
-	require 'db_connect.php';
 
-	$dbc->exec('TRUNCATE ads');
+	require_once '../models/Ads.php';
+	require_once '../models/Profiles.php';
 
 	$ads = array
 	(
@@ -32,23 +28,15 @@
 		]
 	);
 
-	$query = "INSERT INTO ads (username, item_name, description, price, image_url) VALUES (:username, :item_name, :description, :price, :image_url)";
-
-    $stmt = $dbc->prepare($query);
-
 	foreach ($ads as $ad) {
-			$stmt->bindValue(':username', $ad['username'], PDO::PARAM_STR);
-			$stmt->bindValue(':item_name', $ad['item_name'], PDO::PARAM_STR);
-			$stmt->bindValue(':description', $ad['description'], PDO::PARAM_STR);
-			$stmt->bindValue(':price', $ad['price'], PDO::PARAM_STR);
-			$stmt->bindValue(':image_url', $ad['image_url'], PDO::PARAM_STR);
-
-		    $stmt->execute();
-
-		    echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
+		$newAd = new Ads();
+		$newAd->username = $ad['username'];
+		$newAd->item_name = $ad['item_name'];
+		$newAd->description = $ad['description'];
+		$newAd->price = $ad['price'];
+		$newAd->image_url = $ad['image_url'];
+		$newAd->save();
 	}
-
-	$dbc->exec('TRUNCATE profiles');
 
 	$profiles = array
 	(
@@ -72,16 +60,12 @@
 		]
 	);
 
-	$query = "INSERT INTO profiles (username, password, profile_picture, email) VALUES (:username, :password, :profile_picture, :email)";
+	foreach ($profiles as $profile)
+		$newProfile = new Profiles();
+		$newProfile->username = $profile['username'];
+		$newProfile->password = $profile['item_name'];
+		$newProfile->profile_picture = $profile['description'];
+		$newProfile->email = $profile['price'];
+		$newProfile->save();
 
-    $stmt = $dbc->prepare($query);
-
-	foreach ($profiles as $profile) {
-			$stmt->bindValue(':username', $profile['username'], PDO::PARAM_STR);
-			$stmt->bindValue(':password', $profile['password'], PDO::PARAM_STR);
-			$stmt->bindValue(':profile_picture', $profile['profile_picture'], PDO::PARAM_STR);
-			$stmt->bindValue(':email', $profile['email'], PDO::PARAM_STR);
-			$stmt->execute();
-		    echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
-	}
 ?>
