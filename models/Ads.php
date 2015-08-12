@@ -81,9 +81,11 @@ class Ads extends BaseModel
         $stmt->bindValue(':image_url', $this->attributes['image_url'], PDO::PARAM_STR);
         $stmt->execute();
 	}
-	public function delete($id)
+	public static function delete($id)
 	{
-		$query = 'DELETE * FROM ads WHERE id = :id';
+        self::dbConnect();
+
+		$query = 'DELETE FROM ads WHERE id = :id';
 		$stmt = self::$dbc->prepare($query);
 		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
 		$stmt->execute();
