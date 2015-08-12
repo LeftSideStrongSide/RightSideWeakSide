@@ -30,7 +30,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#users.show.php">Profile</a></li>
-        <li><a href="#auth.logout.php">Logout</a></li>
+        <li><a href="/auth.logout.php">Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
