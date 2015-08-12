@@ -1,42 +1,33 @@
 <?
-	session_start();
-	define("DB_HOST", '127.0.0.1');
-	define("DB_NAME", 'adlister_db');
-	define("DB_USER", 'adlister_user');
-	define("DB_PASS", '');
-	require '../database/db_connect.php';
-	require_once '../utils/Input.php';
+
+session_start();
+require_once '../utils/Input.php';
+require_once '../models/Ads.php';
 
 
 $errors = array();
 //add item name, price, and description
-$newAd = $dbc->prepare('INSERT INTO ads (username, item_name, description, price, image_url) VALUES (:username, :item_name, :description, :price, :image_url)');
 if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('description') && Input::has('price')){
-	$newAd->bindValue(':username', $_SESSION['username'], PDO::PARAM_STR);
 	try{
-		$newAd->bindValue(':item_name', Input::getString('item_name'), PDO::PARAM_STR);
-	}catch(InvalidArgumentException $e){
-		$errors[] = $e->getMessage();
-	}catch(OutOfRangeException $e){
-		$errors[] = $e->getMessage();
-	}catch(DomainException $e){
-		$errors[] = $e->getMessage();
-	}catch(LengthException $e){
-		$errors[] = $e->getMessage();
+		$username = $_SESSION['username'];
 	}catch(Exception $e){
 		$errors[] = $e->getMessage();
 	}
 	try{
-	    $newAd->bindValue(':description',  Input::getString('description'),  PDO::PARAM_STR);
-    }catch(Exception $e){
+		$item_name = Input::getString('item_name');
+	}catch(Exception $e){
 		$errors[] = $e->getMessage();
 	}
 	try{
-	    $newAd->bindValue(':price',  Input::getNumber('price'),  PDO::PARAM_STR);
-    }catch(Exception $e){
+		$description = Input::getString('description');
+	}catch(Exception $e){
 		$errors[] = $e->getMessage();
 	}
-	//upload photos
+	try{
+		$price = Input::getNumber('price');
+	}catch(Exception $e){
+		$errors[] = $e->getMessage();
+	}
 	if(!empty(basename($_FILES['image_url']['name']))) {
 	    $uploads_directory = 'img/uploads/';
 	    $filename = $uploads_directory . basename($_FILES['image_url']['name']);
@@ -45,16 +36,21 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 	    } else {
 	        echo "Sorry, there was an error uploading your file.";
 	    }
-		$newAd->bindValue(':image_url',  $filename,  PDO::PARAM_STR);   
+		$image_url = $filename;   
 	}else{
-		$newAd->bindValue(':image_url',  '#.png',  PDO::PARAM_STR);
+		$image_url = '#.png';   
 	}
-	var_dump($_FILES);
-	print_r($errors);
 	if(empty($errors)){
-	    $newAd->execute();
+		$newAd = new Ads();
+		$newAd->username = $username;
+		$newAd->item_name = $item_name;
+		$newAd->description = $description;
+		$newAd->price = $price;
+		$newAd->image_url = $image_url;
+		$newAd->save();
 	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
