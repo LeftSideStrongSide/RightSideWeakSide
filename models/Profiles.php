@@ -87,6 +87,61 @@ class Profiles extends BaseModel
         $stmt->execute();
     }
 
+    public static function getUsername($key)
+    {
+        self::dbConnect();
+        $query = "SELECT * FROM profiles WHERE username = '" . $key . "'";
+        $stmt = self::$dbc->query($query);
+        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($stmtX['username'] === $key) {
+            throw new Exception("Username is already in use.");
+        }
+
+    }
+
+    public static function getEmail($key)
+    {
+        self::dbConnect();
+        $query = "SELECT * FROM profiles WHERE email = '" . $key . "'";
+        $stmt = self::$dbc->query($query);
+        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($stmtX['email'] === $key) {
+            throw new Exception("Email is already in use.");
+        }
+    }
+
+    public static function checkPassword($key, $confirmKey)
+    {
+        if ($key !== $confirmKey) {
+            throw new Exception("Passwords do not match.");
+        }
+    }
+    public static function oldPassword($key, $email)
+    {
+        self::dbConnect();
+        $query = "SELECT * FROM profiles WHERE email = '" . $email . "'";
+        $stmt = self::$dbc->query($query);
+        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($stmtX['password'] !== $key){
+            throw new Exception("Please enter your correct current password.");
+        }
+    }
+    public static function login()
+    {
+        if(!empty($_POST['email'])){
+            self::dbConnect();
+            $query = "SELECT * FROM profiles WHERE email = '" . $_POST['email'] . "'";
+            $stmt = self::$dbc->query($query);
+            $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(hash("sha256",$_POST['password']) === $stmtX['password']){
+                $_SESSION['loggedIn'] = true;
+                $_SESSION['email'] = $_POST['email'];
+            }else{
+                echo "<span class='red'>Username and password combination does not match.</span>";
+            }
+        }
+    }
+
 
 }
 

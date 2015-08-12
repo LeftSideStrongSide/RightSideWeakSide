@@ -21,45 +21,6 @@ class Input
         }
         
     }
-    public static function getUsername($key)
-    {
-        require '../database/db_connect.php';
-        $query = "SELECT * FROM profiles WHERE username = '" . $key . "'";
-        $stmt = $dbc->query($query);
-        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($stmtX['username'] === $key) {
-            throw new Exception("Username is already in use.");
-        }
-
-    }
-
-    public static function getEmail($key)
-    {
-        require '../database/db_connect.php';
-        $query = "SELECT * FROM profiles WHERE email = '" . $key . "'";
-        $stmt = $dbc->query($query);
-        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($stmtX['email'] === $key) {
-            throw new Exception("Email is already in use.");
-        }
-    }
-
-    public static function checkPassword($key, $confirmKey)
-    {
-        if ($key !== $confirmKey) {
-            throw new Exception("Passwords do not match.");
-        }
-    }
-    public static function oldPassword($key, $email)
-    {
-        require '../database/db_connect.php';
-        $query = "SELECT * FROM profiles WHERE email = '" . $email . "'";
-        $stmt = $dbc->query($query);
-        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($stmtX['password'] !== $key){
-            throw new Exception("Please enter your correct current password.");
-        }
-    }
 
     public static function getDate($key)
     {

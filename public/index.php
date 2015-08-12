@@ -5,7 +5,6 @@
 		header('Location: auth.login.php');
 	}
 	require '../utils/Auth.php';
-	require '../database/db_connect.php';
 ?>
 <html lang="en">
 <head>

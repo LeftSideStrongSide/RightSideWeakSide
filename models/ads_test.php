@@ -1,4 +1,4 @@
-<?php 
+<?
 require_once 'Ads.php';
 $newAd = new Ads();
 $newAd->id = 2;
