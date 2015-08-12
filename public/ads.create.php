@@ -48,6 +48,8 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 		$newAd->price = $price;
 		$newAd->image_url = $image_url;
 		$newAd->save();
+		// if the newly created add goes through, redirect to their users page
+		// header('Location: users.show.php');
 	}
 }
 
