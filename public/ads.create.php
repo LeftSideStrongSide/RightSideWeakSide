@@ -38,7 +38,7 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 	    }
 		$image_url = $filename;   
 	}else{
-		$image_url = '#.png';   
+		$image_url = 'img/uploads/colored_dots.jpg';   
 	}
 	if(empty($errors)){
 		$newAd = new Ads();
