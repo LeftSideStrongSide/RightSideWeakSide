@@ -6,7 +6,7 @@ define('DB_NAME', 'adlister_db');
 define('DB_USER', 'adlister_user');
 define('DB_PASS', '');
 
-class Model {
+class BaseModel {
 
     protected static $dbc;
     protected static $table;

@@ -4,19 +4,19 @@
 
 require_once 'BaseModel.php';
 
-class User extends Model
+class Ads extends BaseModel
 {
 	//protected static property
-    protected static $table = 'users';
+    protected static $table = 'ads';
 
-    public static function find($id)
+    public static function find($username)
     {
     	self::dbConnect();
     	//don't want variables in query statement
     	//placeholders only
-    	$query = 'SELECT * FROM users WHERE id = :id';
+    	$query = 'SELECT * FROM ads WHERE username = :username';
     	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    	$stmt->bindValue(':username', $username, PDO::PARAM_INT);
     	$stmt->execute();
 
     	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,12 +28,12 @@ class User extends Model
         }
         return $instance;
     }
-    // Get all rows from the users table
+    // Get all rows from the ads table
     public static function all()
     {
     	//Start by connecting to the DB
     	self::dbConnect();
-    	$stmt = self::$dbc->query('SELECT * FROM users');
+    	$stmt = self::$dbc->query('SELECT * FROM ads');
     	//Assign results to a variable
     	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,7 +45,7 @@ class User extends Model
         return $instance;
 
     }
-    public static function save()
+    public function save()
     {
     	self::dbConnect();
     	//Ensure attributes array has properties
@@ -58,26 +58,32 @@ class User extends Model
 
     	}
     }
-    public static function update()
+    public function update()
     {
-        $query = 'UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id;';
+        $query = 'UPDATE ads SET username = :username, item_name = :item_name, description = :description, price = :price, image_url = :image_url WHERE id = :id;';
         $stmt = self::$dbc->prepare($query);
-        $stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
-        $stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
+        $stmt->bindValue(':username', $this->attributes['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':item_name', $this->attributes['item_name'], PDO::PARAM_STR);
+        $stmt->bindValue(':description', $this->attributes['description'], PDO::PARAM_STR);
+        $stmt->bindValue(':price', $this->attributes['price'], PDO::PARAM_STR); 
+        $stmt->bindValue(':image_url', $this->attributes['image_url'], PDO::PARAM_STR);
         $stmt->bindValue(':id', $this->attributes['id'], PDO::PARAM_INT);
         $stmt->execute();
     }
-    public static function insert()
+    public function insert()
     {
-    	$query = 'INSERT INTO users (first_name, last_name) VALUES (:first_name, :last_name);';
+    	$query = 'INSERT INTO ads (username, item_name, description, price, image_url) VALUES (:username, :item_name, :description, :price, :image_url);';
     	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
-    	$stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
-    	$stmt->execute();
+    	$stmt->bindValue(':username', $this->attributes['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':item_name', $this->attributes['item_name'], PDO::PARAM_STR);
+        $stmt->bindValue(':description', $this->attributes['description'], PDO::PARAM_STR);
+        $stmt->bindValue(':price', $this->attributes['price'], PDO::PARAM_STR); 
+        $stmt->bindValue(':image_url', $this->attributes['image_url'], PDO::PARAM_STR);
+        $stmt->execute();
 	}
-	public static function delete()
+	public function delete($id)
 	{
-		$query = 'DELETE * FROM users WHERE id = :id';
+		$query = 'DELETE * FROM ads WHERE id = :id';
 		$stmt = self::$dbc->prepare($query);
 		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
 		$stmt->execute();
