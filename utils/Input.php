@@ -50,6 +50,16 @@ class Input
             throw new Exception("Passwords do not match.");
         }
     }
+    public static function oldPassword($key, $email)
+    {
+        require '../database/db_connect.php';
+        $query = "SELECT * FROM profiles WHERE email = '" . $email . "'";
+        $stmt = $dbc->query($query);
+        $stmtX = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($stmtX['password'] !== $key){
+            throw new Exception("Please enter your correct current password.");
+        }
+    }
 
     public static function getDate($key)
     {

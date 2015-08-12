@@ -1,6 +1,9 @@
 <?php 
 	session_start();
 	include '../utils/Auth.php';
+	if(!empty($_SESSION['loggedIn'])){
+		header('Location: index.php');
+	}
 ?>
 
 <!DOCTYPE html>
