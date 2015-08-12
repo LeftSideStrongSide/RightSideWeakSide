@@ -7,16 +7,16 @@ require_once 'BaseModel.php';
 class User extends Model
 {
 	//protected static property
-    protected static $table = 'users';
+    protected static $table = 'profiles';
 
-    public static function find($id)
+    public static function find($email)
     {
     	self::dbConnect();
     	//don't want variables in query statement
     	//placeholders only
-    	$query = 'SELECT * FROM users WHERE id = :id';
+    	$query = 'SELECT * FROM users WHERE email = :email';
     	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    	$stmt->bindValue(':email', $email, PDO::PARAM_INT);
     	$stmt->execute();
 
     	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,16 +60,16 @@ class User extends Model
     }
     public static function update()
     {
-        $query = 'UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id;';
+        $query = 'UPDATE profiles SET username = :username, profile_picture = :profile_picture WHERE email = :email;';
         $stmt = self::$dbc->prepare($query);
-        $stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
-        $stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
-        $stmt->bindValue(':id', $this->attributes['id'], PDO::PARAM_INT);
+        $stmt->bindValue(':username', $this->attributes['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':profile_picture', $this->attributes['profile_picture'], PDO::PARAM_STR);
+        $stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
         $stmt->execute();
     }
     public static function insert()
     {
-    	$query = 'INSERT INTO users (first_name, last_name) VALUES (:first_name, :last_name);';
+    	$query = 'INSERT INTO profiles (first_name, last_name) VALUES (:first_name, :last_name);';
     	$stmt = self::$dbc->prepare($query);
     	$stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
     	$stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
@@ -77,7 +77,7 @@ class User extends Model
 	}
 	public static function delete()
 	{
-		$query = 'DELETE * FROM users WHERE id = :id';
+		$query = 'DELETE * FROM profiles WHERE id = :id';
 		$stmt = self::$dbc->prepare($query);
 		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
 		$stmt->execute();
