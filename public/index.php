@@ -5,7 +5,6 @@
 		header('Location: auth.login.php');
 	}
 	require '../utils/Auth.php';
-	require '../database/db_connect.php';
 ?>
 <html lang="en">
 <head>
@@ -39,6 +38,9 @@
 	body > .container {
 	  padding: 60px 15px 0;
 	}
+	main {
+		margin: 10%;
+	}
 	.container .text-muted {
 	  margin: 20px 0;
 	}
@@ -52,11 +54,14 @@
 </style>
 </head>
 <body>
-<!-- jquery  -->
-<script src="/js/jquery.js"></script>
 	<?php include '../views/partials/navbar.php'; ?>
 	<?php include '../views/partials/header.php'; ?>
+	<main>
+		<?php include 'ads.index.php'; ?>
+	</main>
 	<?php include '../views/partials/footer.php'; ?>
+<!-- jquery  -->
+<script src="/js/jquery.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
