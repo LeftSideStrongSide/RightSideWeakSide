@@ -45,7 +45,7 @@ class User extends Model
         return $instance;
 
     }
-    public function save()
+    public static function save()
     {
     	self::dbConnect();
     	//Ensure attributes array has properties
@@ -58,7 +58,7 @@ class User extends Model
 
     	}
     }
-    public function update()
+    public static function update()
     {
         $query = 'UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id;';
         $stmt = self::$dbc->prepare($query);
@@ -67,7 +67,7 @@ class User extends Model
         $stmt->bindValue(':id', $this->attributes['id'], PDO::PARAM_INT);
         $stmt->execute();
     }
-    public function insert()
+    public static function insert()
     {
     	$query = 'INSERT INTO users (first_name, last_name) VALUES (:first_name, :last_name);';
     	$stmt = self::$dbc->prepare($query);
@@ -75,7 +75,7 @@ class User extends Model
     	$stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
     	$stmt->execute();
 	}
-	public function delete()
+	public static function delete()
 	{
 		$query = 'DELETE * FROM users WHERE id = :id';
 		$stmt = self::$dbc->prepare($query);
