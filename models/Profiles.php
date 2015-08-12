@@ -1,43 +1,41 @@
 <?php 
 
-// TODO: CHANGE TO WORK WITH PROFILES DATABASE
+// TODO: CHANGE TO WORK WITH profiles DATABASE
 
 require_once 'BaseModel.php';
 
-class User extends Model
+class Profiles extends BaseModel
 {
-	//protected static property
-    protected static $table = 'users';
+    //protected static property
+    protected static $table = 'profiles';
 
-    public static function find($id)
+    public static function find($email)
     {
-    	self::dbConnect();
-    	//don't want variables in query statement
-    	//placeholders only
-    	$query = 'SELECT * FROM users WHERE id = :id';
-    	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    	$stmt->execute();
+        self::dbConnect();
+        $query = 'SELECT * FROM profiles WHERE email = :email';
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':email', $email, PDO::PARAM_INT);
+        $stmt->execute();
 
-    	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    	$instance = null;
+        $instance = null;
         if ($result) {
             $instance = new static;
             $instance->attributes = $result;
         }
         return $instance;
     }
-    // Get all rows from the users table
+    // Get all rows from the profiles table
     public static function all()
     {
-    	//Start by connecting to the DB
-    	self::dbConnect();
-    	$stmt = self::$dbc->query('SELECT * FROM users');
-    	//Assign results to a variable
-    	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //Start by connecting to the DB
+        self::dbConnect();
+        $stmt = self::$dbc->query('SELECT * FROM profiles');
+        //Assign results to a variable
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    	$instance = null;
+        $instance = null;
         if ($result) {
             $instance = new static;
             $instance->attributes = $result;
@@ -45,43 +43,49 @@ class User extends Model
         return $instance;
 
     }
-    public static function save()
+    public function save()
     {
-    	self::dbConnect();
-    	//Ensure attributes array has properties
-    	if($this->attributes){
-    		if(isset($this->attributes['id'])){
-    			$this->update();
-    		}else{
-    			$this->insert();
-    		}
+        self::dbConnect();
+        //Ensure attributes array has properties
+        if($this->attributes){
+            if(isset($this->attributes['id'])){
+                $this->update();
+            }else{
+                $this->insert();
+            }
 
-    	}
+        }
     }
-    public static function update()
+    public function update()
     {
-        $query = 'UPDATE users SET first_name = :first_name, last_name = :last_name WHERE id = :id;';
+        $query = 'UPDATE profiles SET username = :username, password = :password, profile_picture = :profile_picture, email = :email WHERE id = :id;';
         $stmt = self::$dbc->prepare($query);
-        $stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
-        $stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
+        $stmt->bindValue(':username', $this->attributes['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $this->attributes['password'], PDO::PARAM_STR);
+        $stmt->bindValue(':profile_picture', $this->attributes['profile_picture'], PDO::PARAM_STR);
+        $stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
         $stmt->bindValue(':id', $this->attributes['id'], PDO::PARAM_INT);
         $stmt->execute();
     }
-    public static function insert()
+    public function insert()
     {
-    	$query = 'INSERT INTO users (first_name, last_name) VALUES (:first_name, :last_name);';
-    	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
-    	$stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
-    	$stmt->execute();
-	}
-	public static function delete()
-	{
-		$query = 'DELETE * FROM users WHERE id = :id';
-		$stmt = self::$dbc->prepare($query);
-		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
-		$stmt->execute();
-	}
+        $query = 'INSERT INTO profiles (username, password, profile_picture, email) VALUES (:username, :password, :profile_picture, :email);';
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':username', $this->attributes['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $this->attributes['password'], PDO::PARAM_STR);
+        $stmt->bindValue(':profile_picture', $this->attributes['profile_picture'], PDO::PARAM_STR);
+        $stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public static function delete($email)
+    {
+        self::dbConnect();
+
+        $query = 'DELETE FROM profiles WHERE email = :email';
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':email', $email, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 
 
 }
