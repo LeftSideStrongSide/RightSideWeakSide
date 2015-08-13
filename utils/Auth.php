@@ -35,6 +35,7 @@
 			$profiles->save();
 			$_SESSION['loggedIn'] = true;
 			$_SESSION['email'] = $email;
+			$_SESSION['username'] = $username;
 			header('Location: index.php'); 
 		}
 	}

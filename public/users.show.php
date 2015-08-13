@@ -2,7 +2,8 @@
 <?	
 	session_start();
 	require_once '../bootstrap.php';
-	//TODO: change to only grab adds for this username
+
+	$userError;	
 	if(!$_SESSION['loggedIn']){ 
 		header('Location: auth.login.php');
 		exit();
@@ -11,12 +12,15 @@
 	if(!empty(Ads::find($username)->attributes)){
 		$userAds = Ads::find($username)->attributes;
 	}
-	if (!empty(Input::get('ad'))){
-	    Ads::delete(Input::get('ad'));
-	    header('Location: users.show.php');
-		exit();
+	try{
+		if (!empty(Input::get('ad')) && Ads::checkUsername(Input::get('ad'))){
+		    Ads::delete(Input::get('ad'));
+		    header('Location: users.show.php');
+			exit();
+		}
+	}catch(Exception $e){
+		$userError = $e->getMessage();
 	}
-
 	
 ?>
 <html lang="en">
@@ -66,6 +70,7 @@
 		color: blue;
 	}
 
+
 </style>
 </head>
 <body>
@@ -73,15 +78,16 @@
 	<main>
 		<div id="ads" class="row">
 		    <div class="col-sm-offset-1 col-sm-10">
-		    	<a href="users.edit.php">Edit your profile</a>
-				<h2 class="page-header"><?= $username ?></h2>
+				<h2 class="page-header"><?= $username ?><small><a class= "pull-right" href="users.edit.php">edit your profile</a></small></h2>
 				<h3>Ads</h3>
+				<?= $userError ?>
 				<?php if (!empty($userAds)){
 					foreach($userAds as $ad): ?>
 				  <div class="col-xs-12 col-sm-6 col-md-4">
 				    <img class="img-responsive img-thumbnail " src="<?= $ad['image_url'] ?>" alt="ad image">
 				    <h2><?= $ad['item_name']; ?></h2>
 				    <p><?= $ad['description']; ?></p>
+				    <p><?= $ad['price']; ?></p>
 				    <p>
 				    	<a id="" class="btn btn-default" href="ads.edit.php?id=<?=$ad['id']?>" role="button">Edit &raquo;</a>
 				    	<a class="btn btn-default" href="?ad=<?= $ad['id'] ?>" role="button">Delete &raquo;</a>
