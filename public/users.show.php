@@ -62,6 +62,9 @@
 	code {
 	  font-size: 80%;
 	}
+	.blue{
+		color: blue;
+	}
 
 </style>
 </head>
@@ -70,6 +73,7 @@
 	<main>
 		<div id="ads" class="row">
 		    <div class="col-sm-offset-1 col-sm-10">
+		    	<a href="users.edit.php">Edit your profile</a>
 				<h2 class="page-header"><?= $username ?></h2>
 				<h3>Ads</h3>
 				<?php if (!empty($userAds)){
@@ -82,6 +86,8 @@
 				    	<a id="" class="btn btn-default" href="#" role="button">Edit &raquo;</a>
 				    	<a class="btn btn-default" href="?ad=<?= $ad['id'] ?>" role="button">Delete &raquo;</a>
 				    </p>
+				    <p><a class="btn btn-default" href="ads.edit.php?id=<?=$ad['id']?>" role="button">Edit &raquo;</a><a class="btn btn-default" href="#" role="button">Delete &raquo;</a></p>
+
 				  </div><!--/.col-xs-6.col-lg-4-->
 				<?php endforeach; }?>
 		    </div><!--/"col-sm-10-->

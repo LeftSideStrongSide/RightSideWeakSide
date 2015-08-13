@@ -90,6 +90,20 @@ class Ads extends BaseModel
 		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
 		$stmt->execute();
 	}
+    public static function checkUsername($id)
+    {
+        self::dbConnect();
+        $query = 'SELECT * FROM ads WHERE id = :id';
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($results[0]['username'] === $_SESSION['username']){
+            return true;
+        }else{
+            throw new Exception("Error Processing Request. Please try again later.");
+        }
+    }
 
 
 }
