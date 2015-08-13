@@ -133,6 +133,9 @@ class Profiles extends BaseModel
             if(hash("sha256",$_POST['password']) === $stmtX['password']){
                 $_SESSION['loggedIn'] = true;
                 $_SESSION['email'] = $_POST['email'];
+                $login = Profiles::find('me@me.me');
+                $username = $login->attributes[0]['username'];
+                $_SESSION['username'] = $username;
             }else{
                 echo "<span class='red'>Username and password combination does not match.</span>";
             }
