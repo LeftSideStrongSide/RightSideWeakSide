@@ -94,6 +94,7 @@ if(!empty($_POST['userCreate'])){
 			<input type="password" id="inputPassword" class="form-control" placeholder="Password" name='password' required>
 			<label for="confirmPassword" class="sr-only">Confirm Password</label>
 			<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" name='confirmPassword' required>
+			<p><a href="auth.login.php">Already have an account? Log in here</a></p>
 			<button class="btn btn-lg btn-primary btn-block" name="userCreate" value="Submit" type="submit">Sign in</button>
 		</form>
 
