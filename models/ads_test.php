@@ -1,7 +1,7 @@
 <?
 require_once 'Ads.php';
 $newAd = new Ads();
-$newAd->id = 2;
+$newAd->id = 3;
 $newAd->username = 'alissa';
 $newAd->item_name = 'bubble wrap';
 $newAd->description = 'test';
