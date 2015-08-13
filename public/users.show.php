@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <?	
 	session_start();
+	require_once '../bootstrap.php';
+	//TODO: change to only grab adds for this username
 	if(!$_SESSION['loggedIn']){ 
 		header('Location: auth.login.php');
 	}
-	require '../bootstrap.php';
+	$username = $_SESSION['username'];
+	if(!empty(Ads::find($username)->attributes)){
+		$userAds = Ads::find($username)->attributes;
+	}
+
+	
 ?>
 <html lang="en">
 <head>
@@ -56,7 +63,15 @@
 	<main>
 		<div id="ads" class="row">
 		    <div class="col-sm-offset-1 col-sm-10">
-				<h2>username: <?= $_SESSION['username'] ?></h2>
+				<h2>username: <?= $username ?></h2>
+				<?php foreach($userAds as $ad): ?>
+				  <div class="col-xs-12 col-sm-6 col-md-4">
+				    <img class="img-responsive img-thumbnail " src="<?= $ad['image_url'] ?>" alt="ad image">
+				    <h2><?= $ad['item_name']; ?></h2>
+				    <p><?= $ad['description']; ?></p>
+				    <p><a class="btn btn-default" href="#" role="button">Edit &raquo;</a><a class="btn btn-default" href="#" role="button">Delete &raquo;</a></p>
+				  </div><!--/.col-xs-6.col-lg-4-->
+				<?php endforeach;?>
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
 	</main>
