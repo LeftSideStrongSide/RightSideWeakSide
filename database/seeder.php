@@ -56,6 +56,12 @@
 			'password' => 'Cups',
 			'profile_picture' => 'img/uploads/giraffe.jpg',
 			'email' => 'angryducks@gmail.com'
+		],
+		[
+			'username' => 'me',
+			'password' => hash("sha256", "me"),
+			'profile_picture' => 'img/uplaods/giraffe.jpg',
+			'email' => 'me@me.me'
 		]
 	);
 

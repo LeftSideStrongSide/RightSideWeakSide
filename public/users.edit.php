@@ -5,8 +5,8 @@
 	if(!$_SESSION['loggedIn']){ 
 		header('Location: auth.login.php');
 	}
-	require '../utils/Auth.php';
-	require '../database/db_connect.php';
+	require '../bootstrap.php';
+
 ?>
 <html lang="en">
 <head>
@@ -63,8 +63,7 @@
 <?
 	var_dump($_POST);
 	if(!empty($_POST['changePassword'])){
-		$errors = Auth::changePassword();
-		var_dump($errors);
+		$errors = Profiles::changePassword();
 		if(!empty($errors)){
 			foreach ($errors as $error) {
 				echo "<p><span class='red'>$error</span></p>";
@@ -72,8 +71,8 @@
 		}
 	}
 ?>
-
 	<form class="whereAmI" method="POST">
+	<p>CHANGE PASSWORD</p>
 		<input type="text" name="oldPassword" placeholder="Old Password">
 		<input type="text" name="newPassword" placeholder="New Password">
 		<input type="text" name="confirmNewPassword" placeholder="Confirm New Password">

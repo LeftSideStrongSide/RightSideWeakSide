@@ -56,15 +56,12 @@ class Profiles extends BaseModel
 
         }
     }
-    public function update()
+    public function updateProfilePicture()
     {
-        $query = 'UPDATE profiles SET username = :username, password = :password, profile_picture = :profile_picture, email = :email WHERE id = :id;';
+        $query = 'UPDATE profiles SET profile_picture = :profile_picture WHERE email = :email;';
         $stmt = self::$dbc->prepare($query);
-        $stmt->bindValue(':username', $this->attributes['username'], PDO::PARAM_STR);
-        $stmt->bindValue(':password', $this->attributes['password'], PDO::PARAM_STR);
         $stmt->bindValue(':profile_picture', $this->attributes['profile_picture'], PDO::PARAM_STR);
         $stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
-        $stmt->bindValue(':id', $this->attributes['id'], PDO::PARAM_INT);
         $stmt->execute();
     }
     public function insert()
@@ -138,6 +135,43 @@ class Profiles extends BaseModel
                 $_SESSION['email'] = $_POST['email'];
             }else{
                 echo "<span class='red'>Username and password combination does not match.</span>";
+            }
+        }
+    }
+    public static function changePassword()
+    {
+        if(!empty($_POST['changePassword'])){
+            self::dbConnect();
+            $oldPassword = hash("sha256",trim($_POST['oldPassword']));
+            $password = hash("sha256",trim($_POST['newPassword']));
+            $confirmPassword = hash("sha256",trim($_POST['confirmNewPassword']));
+            $email = trim($_SESSION['email']);
+
+            $query = "  UPDATE profiles
+                        SET password = :password
+                        WHERE email = :email";
+            $stmt = self::$dbc->prepare($query);  
+            try{
+                $stmt->bindValue(':email',  $email,  PDO::PARAM_STR);
+            }catch(Exception $e){
+                $errors[] = $e->getMessage();
+            }
+            try{
+                Profiles::oldPassword($oldPassword, $email);
+            }catch(Exception $e){
+                $errors[] = $e->getMessage();
+            }
+            try{
+                Profiles::checkPassword($password, $confirmPassword);
+            }catch(Exception $e){
+                $errors[] = $e->getMessage();
+            }
+
+            if(empty($errors)){
+                $stmt->bindValue(':password',  $password,  PDO::PARAM_STR);
+                $stmt->execute();
+            }else{
+                return $errors;
             }
         }
     }
