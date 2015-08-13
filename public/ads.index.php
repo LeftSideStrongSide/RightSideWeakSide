@@ -1,7 +1,7 @@
 <?php 
 
 require_once '../bootstrap.php';
-
+$allAds = [];
 if(!empty(Ads::all()->attributes)){
   $allAds = Ads::all()->attributes;
 }

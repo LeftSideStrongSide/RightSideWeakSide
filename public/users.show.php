@@ -3,7 +3,7 @@
 	session_start();
 	require_once '../bootstrap.php';
 
-	$userError;	
+	$userError = "";	
 	if(!$_SESSION['loggedIn']){ 
 		header('Location: auth.login.php');
 		exit();
