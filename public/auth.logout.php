@@ -8,8 +8,8 @@
 		        );
 		    }
 		    session_destroy();
-		    //MAKES THE USER THINK ITS PROCESSING THEIR LOGOUT REQUEST	
-			sleep(.5);
+		    //SETTING USER EXPECTATIONS	
+			sleep(1);
 		    header('Location: auth.login.php');
 		    exit();
 ?>

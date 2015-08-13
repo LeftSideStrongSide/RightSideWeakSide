@@ -55,7 +55,7 @@
 	<?php include '../views/partials/header.php'; ?>
 	<main>
 		<div id="ads" class="row">
-		    <div class="col-sm-offset-1 col-sm-10">
+		    <div class="col-sm-offset-1 col-sm-9">
 				<?php include 'ads.index.php'; ?> 
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
