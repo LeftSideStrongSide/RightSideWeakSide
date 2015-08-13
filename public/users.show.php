@@ -64,7 +64,7 @@
 		<div id="ads" class="row">
 		    <div class="col-sm-offset-1 col-sm-10">
 				<h2>username: <?= $username ?></h2>
-				<?php if (!empty($userAds){
+				<?php if (!empty($userAds)){
 					foreach($userAds as $ad): ?>
 				  <div class="col-xs-12 col-sm-6 col-md-4">
 				    <img class="img-responsive img-thumbnail " src="<?= $ad['image_url'] ?>" alt="ad image">
@@ -72,7 +72,7 @@
 				    <p><?= $ad['description']; ?></p>
 				    <p><a class="btn btn-default" href="#" role="button">Edit &raquo;</a><a class="btn btn-default" href="#" role="button">Delete &raquo;</a></p>
 				  </div><!--/.col-xs-6.col-lg-4-->
-				<?php endforeach;?>
+				<?php endforeach; }?>
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
 	</main>
