@@ -30,6 +30,7 @@
 	body {
 	  /* Margin bottom by footer height */
 	  margin-bottom: 60px;
+	  margin-top: 60px;
 	}
 	.footer {
 	  position: absolute;
@@ -55,15 +56,16 @@
 	code {
 	  font-size: 80%;
 	}
+
 </style>
 </head>
 <body>
 	<?php include '../views/partials/navbar.php'; ?>
-	<?php include '../views/partials/header.php'; ?>
 	<main>
 		<div id="ads" class="row">
 		    <div class="col-sm-offset-1 col-sm-10">
-				<h2>username: <?= $username ?></h2>
+				<h2 class="page-header"><?= $username ?></h2>
+				<h3>Ads</h3>
 				<?php if (!empty($userAds)){
 					foreach($userAds as $ad): ?>
 				  <div class="col-xs-12 col-sm-6 col-md-4">
