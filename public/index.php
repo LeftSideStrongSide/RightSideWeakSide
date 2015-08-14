@@ -5,7 +5,6 @@
 		header('Location: auth.login.php');
 		exit();
 	}
-	require '../bootstrap.php';
 ?>
 <html lang="en">
 <head>
