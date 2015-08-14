@@ -54,7 +54,7 @@ class Ads extends BaseModel
     	//placeholders only
     	$query = 'SELECT * FROM ads WHERE item_name LIKE :item_name';
     	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':item_name', "%" . $search "%", PDO::PARAM_INT);
+    	$stmt->bindValue(':item_name', "%" . $search . "%", PDO::PARAM_INT);
     	$stmt->execute();
 
     	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -16,7 +16,7 @@
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
         <li>
-            <form>
+            <form action="index.php">
               <input style="margin-top: 12px" placeholder=" Search" name="search" type="text"><button class="glyphicon glyphicon-search" type="submit"></button>
             </form>
         </li>
