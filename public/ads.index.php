@@ -1,10 +1,10 @@
 <?php 
 
-session_start();
-if(!empty(Input::get('search')){
+if(!empty(Input::get('search'))){
   $allAds = [];
   if(!empty(Ads::search(Input::get('search'))->attributes)){
     $allAds = Ads::search(Input::get('search'))->attributes;
+  }
 }else{
   $allAds = [];
   if(!empty(Ads::all()->attributes)){
