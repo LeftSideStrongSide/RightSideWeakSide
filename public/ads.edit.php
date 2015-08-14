@@ -2,6 +2,8 @@
 
 session_start();
 require_once '../bootstrap.php';
+$results = Ads::findItem(Input::get('id'));
+$results = $results->attributes[0];
 
 $errors = array();
 //add item name, price, and description
@@ -43,7 +45,7 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 	    }
 		$image_url = $filename;   
 	}else{
-		$image_url = 'img/uploads/colored_dots.jpg';   
+		$image_url = $results['image_url'];   
 	}
 	if(empty($errors)){
 		$newAd = new Ads();
@@ -116,8 +118,10 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 </head>
 <body>
 	<main>
+		<? include '../views/partials/navbar.php'; ?>
 
-		<h1>EDIT an Ad</h1>
+
+		<h1>Edit your Ad</h1>
 		<?php foreach($errors as $error): ?>
 			<p><?= $error ?></p>
 		<?php endforeach; ?>
@@ -125,27 +129,28 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 			<div class="form-group">
 				<div class="col-md-4">
 					<label for="item_name">Item Name:</label>
-					<input value="<?= Input::get('item_name'); ?>" id="item_name" name="item_name" type="text" class="form-control">
+					<input value="<?= $results['item_name'] ?>" id="item_name" name="item_name" type="text" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="price">Price:</label>
-					<input value="<?= Input::get('price'); ?>" name="price" type="text" class="form-control" id="price">
+					<input value="<?= $results['price'] ?>" name="price" type="text" class="form-control" id="price">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="image_url">Upload Image:</label>
-					<input type="file" name="image_url" id="image_url">
+					<input type="file" name="image_url" id="image_url" value="">
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div class="form-group">
 				  <label for="description">Description:</label>
-				  <textarea name="description" value="<?= Input::get('description'); ?>"class="form-control" rows="5" id="description"></textarea>
+				  <textarea name="description" class="form-control" rows="5" id="description"><?= $results['description'] ?></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
+				<? var_dump($results['image_url']); ?>
 			</div>
 		</form>
 	</main>

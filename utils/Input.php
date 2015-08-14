@@ -34,7 +34,7 @@ class Input
             throw new Exception($value . ' is not a valid date.');
         }
     }
-    public static function getNumber($key, $min = 1, $max = 9999999999.99 )
+    public static function getNumber($key, $min = 0, $max = 9999999999.99 )
     {
         $number = Input::get($key);
         if(empty($number)){
