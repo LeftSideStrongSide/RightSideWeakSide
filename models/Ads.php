@@ -30,12 +30,31 @@ class Ads extends BaseModel
     }
      public static function findItem($id)
     {
+        self::dbConnect();
+        //don't want variables in query statement
+        //placeholders only
+        $query = 'SELECT * FROM ads WHERE id = :id';
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $instance = null;
+        if ($result) {
+            $instance = new static;
+            $instance->attributes = $result;
+        }
+        return $instance;
+    }
+      public static function search($search)
+    {
     	self::dbConnect();
     	//don't want variables in query statement
     	//placeholders only
-    	$query = 'SELECT * FROM ads WHERE id = :id';
+    	$query = 'SELECT * FROM ads WHERE item_name LIKE :item_name';
     	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    	$stmt->bindValue(':item_name', "%" . $search "%", PDO::PARAM_INT);
     	$stmt->execute();
 
     	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
