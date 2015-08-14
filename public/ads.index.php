@@ -1,5 +1,5 @@
 <?php 
-
+//comment
 require_once '../bootstrap.php';
 $allAds = [];
 if(!empty(Ads::all()->attributes)){
