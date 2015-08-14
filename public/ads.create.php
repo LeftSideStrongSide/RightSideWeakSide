@@ -135,7 +135,7 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 			<div class="col-md-12">
 				<div class="form-group">
 				  <label for="description">Description:</label>
-				  <textarea name="description" value="<?= Input::get('description'); ?>"class="form-control" rows="5" id="description"></textarea>
+				  <textarea name="description" class="form-control" rows="5" id="description"><?= Input::get('description'); ?></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
