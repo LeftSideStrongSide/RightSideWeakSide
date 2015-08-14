@@ -1,9 +1,24 @@
 <!DOCTYPE html>
 <?	
 	session_start();
+	require_once '../bootstrap.php';
+
+	$numberOfAds = Ads::numberOfAds();
 	if(!$_SESSION['loggedIn']){ 
 		header('Location: auth.login.php');
 		exit();
+	}
+	//PREVENTS RANDOM JUNK. REDIRECT TO FIRST PAGE
+	if(!isset($_GET['pageNum']) || preg_match('/^\d+\.\d+$/',$_GET['pageNum']))
+	{
+		$_GET['pageNum'] = 0;
+		header('Location: ?pageNum=1');
+		exit();
+	}
+	//PREVENTS RANDOM JUNK. REDIRECT TO FIRST PAGE
+	if((!empty($_GET['pageNum']) && $_GET['pageNum'] < 0 || $_GET['pageNum']*4 >= $numberOfAds))
+	{
+		$_GET['pageNum'] = 1;
 	}
 ?>
 <html lang="en">
@@ -71,7 +86,7 @@
 </style>
 </head>
 <body>
-	<?php include '../views/partials/navbar.php'; ?>
+	<?php include '../views/partials/navbar.php';?>
 	<main>
 		<div id="ads" class="row">
 		    <div class="col-xs-offset-1 col-xs-10">

@@ -1,6 +1,8 @@
 <?php 
 
   require '../bootstrap.php';
+  $offset = Input::get('pageNum');
+  $offset = ($offset - 1) * 6;
   if(!empty(Input::get('search'))){
     $allAds = [];
     if(!empty(Ads::search(Input::get('search'))->attributes)){
@@ -8,8 +10,8 @@
     }
   }else{
     $allAds = [];
-    if(!empty(Ads::all()->attributes)){
-      $allAds = Ads::all()->attributes;
+    if(!empty(Ads::paginate($offset))){
+      $allAds = Ads::paginate($offset);
     }
   }
   
