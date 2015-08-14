@@ -142,6 +142,21 @@ class Ads extends BaseModel
             throw new Exception("Error Processing Request. Please try again later.");
         }
     }
+    public static function numberOfAds()
+    {
+        self::dbConnect();
+        $stmt = self::$dbc->prepare('SELECT count(*) FROM ads');
+        $stmt->execute();
+        $stmtX = $stmt->fetchColumn();
+    }
+    public static function paginate($offset)
+    {
+        self::dbConnect();
+        $stmt = self::$dbc->prepare("SELECT * FROM ads LIMIT 6 OFFSET :offset");
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 
