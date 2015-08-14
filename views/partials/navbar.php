@@ -16,7 +16,9 @@
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
         <li>
-
+            <form>
+              <input style="margin-top: 12px" placeholder=" Search" name="search" type="text"><button class="glyphicon glyphicon-search" type="submit"></button>
+            </form>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

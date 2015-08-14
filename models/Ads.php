@@ -117,7 +117,7 @@ class Ads extends BaseModel
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if($results[0]['username'] === $_SESSION['username']){
+        if(!empty($results[0]['username']) && $results[0]['username'] === $_SESSION['username']){
             return true;
         }else{
             throw new Exception("Error Processing Request. Please try again later.");
