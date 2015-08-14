@@ -11,12 +11,31 @@ class Ads extends BaseModel
 
     public static function find($username)
     {
+        self::dbConnect();
+        //don't want variables in query statement
+        //placeholders only
+        $query = 'SELECT * FROM ads WHERE username = :username';
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':username', $username, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $instance = null;
+        if ($result) {
+            $instance = new static;
+            $instance->attributes = $result;
+        }
+        return $instance;
+    }
+     public static function findItem($id)
+    {
     	self::dbConnect();
     	//don't want variables in query statement
     	//placeholders only
-    	$query = 'SELECT * FROM ads WHERE username = :username';
+    	$query = 'SELECT * FROM ads WHERE id = :id';
     	$stmt = self::$dbc->prepare($query);
-    	$stmt->bindValue(':username', $username, PDO::PARAM_INT);
+    	$stmt->bindValue(':id', $id, PDO::PARAM_INT);
     	$stmt->execute();
 
     	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
