@@ -123,8 +123,6 @@ class Ads extends BaseModel
             throw new Exception("Error Processing Request. Please try again later.");
         }
     }
-
-
 }
 
 
