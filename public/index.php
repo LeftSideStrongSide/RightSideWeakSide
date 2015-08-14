@@ -48,6 +48,21 @@
 	code {
 	  font-size: 80%;
 	}
+	.image{
+		height: 200px;
+		width: 200px;
+	}
+	img {
+	    display: block;
+	    max-width:90%;
+	    max-height:90%;
+	    width: auto;
+	    height: auto;
+	}#picture_holder{
+		height:200px;
+		width:100%;
+	    overflow:hidden;
+	}
 </style>
 </head>
 <body>
@@ -55,7 +70,7 @@
 	<?php include '../views/partials/header.php'; ?>
 	<main>
 		<div id="ads" class="row">
-		    <div class="col-sm-offset-1 col-sm-10">
+		    <div class="col-xs-offset-1 col-xs-10">
 				<?php include 'ads.index.php'; ?> 
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
