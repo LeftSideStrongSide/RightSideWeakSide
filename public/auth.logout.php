@@ -9,7 +9,7 @@
 		    }
 		    session_destroy();
 		    //SETTING USER EXPECTATIONS	
-			sleep(1);
+			sleep(.5);
 		    header('Location: auth.login.php');
 		    exit();
 ?>
