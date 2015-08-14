@@ -1,16 +1,17 @@
 <?php 
 
-if(!empty(Input::get('search'))){
-  $allAds = [];
-  if(!empty(Ads::search(Input::get('search'))->attributes)){
-    $allAds = Ads::search(Input::get('search'))->attributes;
+  require '../bootstrap.php';
+  if(!empty(Input::get('search'))){
+    $allAds = [];
+    if(!empty(Ads::search(Input::get('search'))->attributes)){
+      $allAds = Ads::search(Input::get('search'))->attributes;
+    }
+  }else{
+    $allAds = [];
+    if(!empty(Ads::all()->attributes)){
+      $allAds = Ads::all()->attributes;
+    }
   }
-}else{
-  $allAds = [];
-  if(!empty(Ads::all()->attributes)){
-    $allAds = Ads::all()->attributes;
-  }
-}
 
   //TODO: Grab ads from database to populate the columns as formatted below 
   // (foreach loop)
