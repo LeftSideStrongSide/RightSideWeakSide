@@ -81,6 +81,7 @@
 		</div><!--/row-->
 	</main>
 	<?php include '../views/partials/footer.php'; ?>
+	
 <!-- jquery  -->
 <script src="/js/jquery.js"></script>
 

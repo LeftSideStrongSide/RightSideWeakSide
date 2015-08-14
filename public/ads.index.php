@@ -12,6 +12,7 @@
       $allAds = Ads::all()->attributes;
     }
   }
+  
 
   //TODO: Grab ads from database to populate the columns as formatted below 
   // (foreach loop)
