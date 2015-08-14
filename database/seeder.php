@@ -19,7 +19,63 @@
 			'image_url' => 'img/uploads/chameleon.jpg'
 		],
 		[
-			'username' => 'AngryDuck',
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
+			'item_name' => 'Cups',
+			'description' => 'Cups.',
+			'price' => '1.50',
+			'image_url' => 'img/uploads/oranges.png'
+		],
+		[
+			'username' => 'me',
 			'item_name' => 'Cups',
 			'description' => 'Cups.',
 			'price' => '1.50',
