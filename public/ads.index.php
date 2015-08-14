@@ -24,7 +24,6 @@ if(!empty(Ads::all()->attributes)){
         <img class="img-responsive img-thumbnail" src="<?= $ad['image_url'] ?>" alt="ad image">
       </div>
       <h2><?= $ad['item_name']; ?></h2>
-      <p><?= $ad['description']; ?></p>
       <p>$<?= $ad['price']; ?></p>
       <p><a class="btn btn-default" href="ads.show.php?details=<?= $ad['id'] ?>" role="button">View details &raquo;</a></p>
     </div><!--/.col-xs-6.col-lg-4-->

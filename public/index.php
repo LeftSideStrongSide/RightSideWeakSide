@@ -22,7 +22,7 @@
 	}
 	body {
 	  /* Margin bottom by footer height */
-	  margin-bottom: 60px;
+	  margin-bottom: 80px;
 	}
 	.footer {
 	  position: absolute;
@@ -37,6 +37,10 @@
 	/* Not required for template or sticky footer method. */
 	body > .container {
 	  padding: 60px 15px 0;
+	}
+	.page-header{
+		margin-top: 6em;
+		margin-left: -10px;
 	}
 	.container .text-muted {
 	  margin: 20px 0;
@@ -62,15 +66,16 @@
 		height:200px;
 		width:100%;
 	    overflow:hidden;
+	    padding-top: 1.5em;
 	}
 </style>
 </head>
 <body>
 	<?php include '../views/partials/navbar.php'; ?>
-	<?php include '../views/partials/header.php'; ?>
 	<main>
 		<div id="ads" class="row">
 		    <div class="col-xs-offset-1 col-xs-10">
+				<?php include '../views/partials/header.php'; ?>
 				<?php include 'ads.index.php'; ?> 
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
