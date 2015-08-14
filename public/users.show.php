@@ -86,8 +86,7 @@
 				  <div class="col-xs-12 col-sm-6 col-md-4">
 				    <img class="img-responsive img-thumbnail " src="<?= $ad['image_url'] ?>" alt="ad image">
 				    <h2><?= $ad['item_name']; ?></h2>
-				    <p><?= $ad['description']; ?></p>
-				    <p><?= $ad['price']; ?></p>
+				    <p>$<?= $ad['price']; ?></p>
 				    <p>
 				    	<a id="" class="btn btn-default" href="ads.edit.php?id=<?=$ad['id']?>" role="button">Edit &raquo;</a>
 				    	<a class="btn btn-default" href="?ad=<?= $ad['id'] ?>" role="button">Delete &raquo;</a>
