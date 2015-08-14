@@ -39,7 +39,7 @@
 	}
 	body {
 	  /* Margin bottom by footer height */
-	  margin-bottom: 60px;
+	  margin-bottom: 80px;
 	  margin-top: 60px;
 	}
 	.footer {
@@ -69,6 +69,18 @@
 	.blue{
 		color: blue;
 	}
+	img {
+	    display: block;
+	    max-width:90%;
+	    max-height:90%;
+	    width: auto;
+	    height: auto;
+	}#picture_holder{
+		height:200px;
+		width:100%;
+	    overflow:hidden;
+	    padding-top: 1.5em;
+	}
 
 
 </style>
@@ -84,7 +96,9 @@
 				<?php if (!empty($userAds)){
 					foreach($userAds as $ad): ?>
 				  <div class="col-xs-12 col-sm-6 col-md-4">
-				    <img class="img-responsive img-thumbnail " src="<?= $ad['image_url'] ?>" alt="ad image">
+				  	<div id="picture_holder">
+					    <img class="img-responsive img-thumbnail " src="<?= $ad['image_url'] ?>" alt="ad image">
+				  	</div>
 				    <h2><?= $ad['item_name']; ?></h2>
 				    <p>$<?= $ad['price']; ?></p>
 				    <p>
