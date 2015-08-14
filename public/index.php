@@ -48,6 +48,24 @@
 	code {
 	  font-size: 80%;
 	}
+<<<<<<< HEAD
+=======
+	.image{
+		height: 200px;
+		width: 200px;
+	}
+	img {
+	    display: block;
+	    max-width:90%;
+	    max-height:90%;
+	    width: auto;
+	    height: auto;
+	}#picture_holder{
+		height:200px;
+		width:100%;
+	    overflow:hidden;
+	}
+>>>>>>> 93799270bdaaf6ec4a05aaf4322fb347047985e2
 </style>
 </head>
 <body>
@@ -55,7 +73,11 @@
 	<?php include '../views/partials/header.php'; ?>
 	<main>
 		<div id="ads" class="row">
+<<<<<<< HEAD
 		    <div class="col-sm-offset-1 col-sm-9">
+=======
+		    <div class="col-xs-offset-1 col-xs-10">
+>>>>>>> 93799270bdaaf6ec4a05aaf4322fb347047985e2
 				<?php include 'ads.index.php'; ?> 
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
