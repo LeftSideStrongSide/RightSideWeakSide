@@ -3,6 +3,7 @@
 	session_start();
 	if(!$_SESSION['loggedIn']){ 
 		header('Location: auth.login.php');
+		exit();
 	}
 	require '../bootstrap.php';
 ?>
