@@ -73,7 +73,6 @@
 
 	<div class="container">
 <?
-var_dump($_POST);
 if(!empty($_POST['userCreate'])){
 	$errors = Auth::newUser();
 	var_dump($errors);

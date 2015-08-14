@@ -150,7 +150,6 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 				  <textarea name="description" class="form-control" rows="5" id="description"><?= $results['description'] ?></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
-				<? var_dump($results['image_url']); ?>
 			</div>
 		</form>
 	</main>

@@ -12,20 +12,11 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse Ads<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Furniture</a></li>
-            <li><a href="#">Appliances</a></li>
-            <li><a href="#">Entertainment</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">All Ads</li>
-            <li><a href="#">Most Recent</a></li>
-            <li><a href="#">Free</a></li>
-          </ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="about.php">About</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li>
+
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
