@@ -30,5 +30,3 @@ if(!empty(Ads::all()->attributes)){
     </div><!--/.col-xs-6.col-lg-4-->
   <?php endforeach;?>
 </div><!--/row-->
-
-
