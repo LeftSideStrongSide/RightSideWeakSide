@@ -12,7 +12,7 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 		$errors[] = $e->getMessage();
 	}
 	try{
-		$item_name = Input::getString('item_name');
+		$item_name = Input::getString('item_name', 1, 20);
 	}catch(Exception $e){
 		$errors[] = $e->getMessage();
 	}
