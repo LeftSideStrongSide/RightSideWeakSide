@@ -9,16 +9,19 @@
 		exit();
 	}
 	//PREVENTS RANDOM JUNK. REDIRECT TO FIRST PAGE
-	if(!isset($_GET['pageNum']) || preg_match('/^\d+\.\d+$/',$_GET['pageNum']))
-	{
-		$_GET['pageNum'] = 0;
+	// if(!isset($_GET['pageNum']) || preg_match('/^\d+\.\d+$/',$_GET['pageNum']))
+	// {
+	// 	$_GET['pageNum'] = 0;
+	// 	header('Location: ?pageNum=1');
+	// 	exit();
+	// }
+	// //PREVENTS RANDOM JUNK. REDIRECT TO FIRST PAGE
+	// if((!empty($_GET['pageNum']) && $_GET['pageNum'] < 0 || $_GET['pageNum']*4 >= $numberOfAds))
+	// {
+	// 	$_GET['pageNum'] = 1;
+	// }
+	if(empty($_GET)){
 		header('Location: ?pageNum=1');
-		exit();
-	}
-	//PREVENTS RANDOM JUNK. REDIRECT TO FIRST PAGE
-	if((!empty($_GET['pageNum']) && $_GET['pageNum'] < 0 || $_GET['pageNum']*4 >= $numberOfAds))
-	{
-		$_GET['pageNum'] = 1;
 	}
 ?>
 <html lang="en">
@@ -77,7 +80,8 @@
 	    max-height:90%;
 	    width: auto;
 	    height: auto;
-	}#picture_holder{
+	}
+	#picture_holder{
 		height:200px;
 		width:100%;
 	    overflow:hidden;
@@ -92,6 +96,13 @@
 		    <div class="col-xs-offset-1 col-xs-10">
 				<?php include '../views/partials/header.php'; ?>
 				<?php include 'ads.index.php'; ?> 
+		    	<? 	if($_GET['pageNum'] > 1){
+				    	echo '<a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] - 1 ) . ' ">Previous Page</a>';
+				   	}
+				   	if((($_GET['pageNum']*6)) < $numberOfAds){
+						echo ' <a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] + 1 ) . ' ">Next Page</a>';
+					}
+				?>
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
 	</main>

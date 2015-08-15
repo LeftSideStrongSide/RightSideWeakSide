@@ -148,6 +148,7 @@ class Ads extends BaseModel
         $stmt = self::$dbc->prepare('SELECT count(*) FROM ads');
         $stmt->execute();
         $stmtX = $stmt->fetchColumn();
+        return $stmtX;
     }
     public static function paginate($offset)
     {
