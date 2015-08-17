@@ -96,11 +96,14 @@
 		    <div class="col-xs-offset-1 col-xs-10">
 				<?php include '../views/partials/header.php'; ?>
 				<?php include 'ads.index.php'; ?> 
-		    	<? 	if($_GET['pageNum'] > 1){
-				    	echo '<a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] - 1 ) . ' ">Previous Page</a>';
-				   	}
-				   	if((($_GET['pageNum']*6)) < $numberOfAds){
-						echo ' <a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] + 1 ) . ' ">Next Page</a>';
+		    	<? 	
+		    		if(!empty($_GET['pageNum'])){
+				    	if($_GET['pageNum'] > 1){
+					    	echo '<a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] - 1 ) . ' ">Previous Page</a>';
+					   	}
+					   	if((($_GET['pageNum']*6)) < $numberOfAds){
+							echo ' <a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] + 1 ) . ' ">Next Page</a>';
+						}
 					}
 				?>
 		    </div><!--/"col-sm-10-->
