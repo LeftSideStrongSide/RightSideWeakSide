@@ -88,6 +88,11 @@
 	    overflow:hidden;
 	    padding-top: 1.5em;
 	}
+	.pagination{
+		margin:0 auto;
+		padding-top: 20px;
+		padding-bottom: 0px;
+	}
 </style>
 </head>
 <body>
@@ -97,7 +102,7 @@
 		    <div class="col-xs-offset-1 col-xs-10">
 				<?php include '../views/partials/header.php'; ?>
 				<?php include 'ads.index.php'; ?> 
-				<nav>
+				<nav id="pagination" class='text-center'>
 					<ul class="pagination">
 						<li>
 							<a href="?pageNum=<?= (Input::get('pageNum') - 1 ) ?>" aria-label="Previous">
