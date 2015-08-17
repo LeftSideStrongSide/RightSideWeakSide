@@ -8,6 +8,7 @@
 		header('Location: auth.login.php');
 		exit();
 	}
+
 	//if no page number go to first page
 	if(empty($_GET)){
 		header('Location: ?pageNum=1');
