@@ -14,7 +14,6 @@
 		header('Location: ?pageNum=1');
 		exit();
 	}
-	//if page number out of range redirect
 	if(Input::get('pageNum') < 1){
 		header('Location: ?pageNum=' . Ads::numberOfPages());
 		exit();
