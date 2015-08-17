@@ -8,21 +8,22 @@
 		header('Location: auth.login.php');
 		exit();
 	}
-	//PREVENTS RANDOM JUNK. REDIRECT TO FIRST PAGE
-	// if(!isset($_GET['pageNum']) || preg_match('/^\d+\.\d+$/',$_GET['pageNum']))
-	// {
-	// 	$_GET['pageNum'] = 0;
-	// 	header('Location: ?pageNum=1');
-	// 	exit();
-	// }
-	// //PREVENTS RANDOM JUNK. REDIRECT TO FIRST PAGE
-	// if((!empty($_GET['pageNum']) && $_GET['pageNum'] < 0 || $_GET['pageNum']*4 >= $numberOfAds))
-	// {
-	// 	$_GET['pageNum'] = 1;
-	// }
-	if(empty($_GET) || !is_numeric($_GET['pageNum']) || preg_match('/^\d+\.\d+$/',$_GET['pageNum'])){
+
+	//if no page number go to first page
+	if(empty($_GET)){
 		header('Location: ?pageNum=1');
+		exit();
 	}
+	//if page number out of range redirect
+	if(Input::get('pageNum') < 1){
+		header('Location: ?pageNum=' . Ads::numberOfPages());
+		exit();
+	}
+	if(Input::get('pageNum') > Ads::numberOfPages()){
+		header('Location: ?pageNum=1');
+		exit();
+	}
+
 ?>
 <html lang="en">
 <head>
@@ -96,16 +97,23 @@
 		    <div class="col-xs-offset-1 col-xs-10">
 				<?php include '../views/partials/header.php'; ?>
 				<?php include 'ads.index.php'; ?> 
-		    	<? 	
-		    		if(!empty($_GET['pageNum'])){
-				    	if($_GET['pageNum'] > 1){
-					    	echo '<a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] - 1 ) . ' ">Previous Page</a>';
-					   	}
-					   	if((($_GET['pageNum']*6)) < $numberOfAds){
-							echo ' <a class="btn btn-default" href ="?pageNum=' . ($_GET['pageNum'] + 1 ) . ' ">Next Page</a>';
-						}
-					}
-				?>
+				<nav>
+					<ul class="pagination">
+						<li>
+							<a href="?pageNum=<?= (Input::get('pageNum') - 1 ) ?>" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<? for($x = 1; $x <= Ads::numberOfPages(); $x++): ?>
+							<li><a href="?pageNum=<?= $x ?>"><?= $x ?></a></li>
+						<? endfor; ?>
+						<li>
+							<a href="?pageNum=<?= (Input::get('pageNum') + 1 ) ?>" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
 		    </div><!--/"col-sm-10-->
 		</div><!--/row-->
 	</main>
