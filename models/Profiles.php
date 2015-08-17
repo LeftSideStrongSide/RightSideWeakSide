@@ -3,6 +3,7 @@
 // TODO: CHANGE TO WORK WITH profiles DATABASE
 
 require_once 'BaseModel.php';
+require_once '../bootstrap.php';
 
 class Profiles extends BaseModel
 {
@@ -133,11 +134,13 @@ class Profiles extends BaseModel
             if(hash("sha256",$_POST['password']) === $stmtX['password']){
                 $_SESSION['loggedIn'] = true;
                 $_SESSION['email'] = $_POST['email'];
+                Auth::login($_SESSION['email']);
                 $login = Profiles::find('me@me.me');
                 $username = $login->attributes[0]['username'];
                 $_SESSION['username'] = $username;
             }else{
                 echo "<span class='red'>Username and password combination does not match.</span>";
+                Auth::failedLogin($_POST['email']);
             }
         }
     }
@@ -178,6 +181,42 @@ class Profiles extends BaseModel
             }
         }
     }
+    public static function newUser()
+        {
+            $username = trim($_POST['username']);
+            $email = trim($_POST['email']);
+            $password = trim($_POST['password']);
+            $confirmPassword = trim($_POST['confirmPassword']);
+            $profiles = new Profiles();
+            try{
+                Profiles::getUsername($username);
+            }catch(Exception $e){
+                $errors[] = $e->getMessage();
+            }
+            try{
+                Profiles::getEmail($email);
+            }catch(Exception $e){
+                $errors[] = $e->getMessage();
+            }
+            try{
+                Profiles::checkPassword($password, $confirmPassword);
+            }catch(Exception $e){
+                $errors[] = $e->getMessage();
+            }
+            if(empty($errors)){
+                $profiles->username = $username;
+                $profiles->email = $email;
+                $profiles->password = hash("sha256", $password);
+                $profiles->profile_picture = "#.png";
+            }else{
+                return $errors;
+            }
+            $profiles->save();
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['email'] = $email;
+            $_SESSION['username'] = $username;
+            header('Location: index.php'); 
+        }
 
 
 }

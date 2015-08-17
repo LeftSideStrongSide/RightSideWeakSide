@@ -1,52 +1,17 @@
 <?
-	require_once '../models/Profiles.php';
+	require_once '../bootstrap.php';
 	class Auth
 	{
-		public static function newUser()
-		{
-			$username = trim($_POST['username']);
-			$email = trim($_POST['email']);
-			$password = trim($_POST['password']);
-			$confirmPassword = trim($_POST['confirmPassword']);
-			$profiles = new Profiles();
-			try{
-				Profiles::getUsername($username);
-			}catch(Exception $e){
-				$errors[] = $e->getMessage();
-			}
-			try{
-				Profiles::getEmail($email);
-			}catch(Exception $e){
-				$errors[] = $e->getMessage();
-			}
-			try{
-				Profiles::checkPassword($password, $confirmPassword);
-			}catch(Exception $e){
-				$errors[] = $e->getMessage();
-			}
-		    if(empty($errors)){
-				$profiles->username = $username;
-				$profiles->email = $email;
-				$profiles->password = hash("sha256", $password);
-				$profiles->profile_picture = "#.png";
-		    }else{
-		    	return $errors;
-		    }
-			$profiles->save();
-			$_SESSION['loggedIn'] = true;
-			$_SESSION['email'] = $email;
-			$_SESSION['username'] = $username;
-			header('Location: index.php'); 
-		}
+		public static function login($email)
+	    {
+			$log = new Log('loginAttempts');
+	    	$log->info("User {$email} logged in.");
+	    }
+
+		public static function failedLogin($email)
+	    {
+			$log = new Log('loginAttempts');
+	    	$log->info("User {$email} failed to login.");
+	    }
 	}
-
-
-
-
-
-
-
-
-
-
 ?>

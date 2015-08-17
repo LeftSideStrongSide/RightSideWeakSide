@@ -74,7 +74,7 @@
 	<div class="container">
 <?
 if(!empty($_POST['userCreate'])){
-	$errors = Auth::newUser();
+	$errors = Profiles::newUser();
 	var_dump($errors);
 	if(!empty($errors)){
 		foreach ($errors as $error) {

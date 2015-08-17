@@ -20,7 +20,7 @@
 	// {
 	// 	$_GET['pageNum'] = 1;
 	// }
-	if(empty($_GET)){
+	if(empty($_GET) || !is_numeric($_GET['pageNum']) || preg_match('/^\d+\.\d+$/',$_GET['pageNum'])){
 		header('Location: ?pageNum=1');
 	}
 ?>
