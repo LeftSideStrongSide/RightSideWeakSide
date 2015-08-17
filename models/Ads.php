@@ -152,17 +152,17 @@ class Ads extends BaseModel
     public static function offset()
     {
         $offset = Input::get('pageNum');
-        return ($offset - 1) * 2;
+        return ($offset - 1) * 6;
     }
     public static function numberOfPages()
     {
-        return (ceil(Ads::numberOfAds()/2));
+        return (ceil(Ads::numberOfAds()/6));
     }
 
     public static function paginate()
     {
         self::dbConnect();
-        $stmt = self::$dbc->prepare("SELECT * FROM ads LIMIT 2 OFFSET :offset");
+        $stmt = self::$dbc->prepare("SELECT * FROM ads LIMIT 6 OFFSET :offset");
         $stmt->bindValue(':offset', Ads::offset(), PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -16,13 +16,16 @@
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
         <li>
+
+<!--        Search just aint workin'.
             <form action="index.php">
               <input style="margin-top: 12px" placeholder=" Search" name="search" type="text"><button style="height: 26px; width: 27px" class="glyphicon glyphicon-search" type="submit"></button>
-            </form>
+            </form> -->
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/ads.create.php">Create Ad</a></li>
+        <li><a href="/bulk.create.php">Bulk Create</a></li>
         <li><a href="/users.show.php">Profile</a></li>
         <li><a href="/auth.logout.php">Logout</a></li>
 

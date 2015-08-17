@@ -217,6 +217,10 @@ class Profiles extends BaseModel
             $_SESSION['username'] = $username;
             header('Location: index.php'); 
         }
+        public static function doNothin()
+        {
+
+        }
 
 
 }
