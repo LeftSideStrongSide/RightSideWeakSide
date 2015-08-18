@@ -109,7 +109,7 @@ if (!empty($_SESSION['username']) && Input::has('item_name') && Input::has('desc
 <body>
 	<main>
 		<?php include '../views/partials/navbar.php'; ?>
-		<h1>Create an Ad</h1>
+		<h1>Create an Ad</h1><h4><a href='bulk.create.php'>Have too many ads? Click here to upload with a csv file!</a></h4>
 		<?php foreach($errors as $error): ?>
 			<p><?= $error ?></p>
 		<?php endforeach; ?>
