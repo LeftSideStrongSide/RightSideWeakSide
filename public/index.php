@@ -109,7 +109,7 @@
 							</a>
 						</li>
 						<? for($x = 1; $x <= Ads::numberOfPages(); $x++): ?>
-							<li class="<?= Input::get('pageNum')==$x ? 'active': 'disabled'; ?>"><a href="?pageNum=<?= $x ?>"><?= $x ?></a></li>
+							<li class="<?= Input::get('pageNum')==$x ? 'active': ''; ?>"><a href="?pageNum=<?= $x ?>"><?= $x ?></a></li>
 						<? endfor; ?>
 						<li>
 							<a href="?pageNum=<?= (Input::get('pageNum') + 1 ) ?>" aria-label="Next">
