@@ -25,7 +25,6 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/ads.create.php">Create Ad</a></li>
-        <li><a href="/bulk.create.php">Bulk Create</a></li>
         <li><a href="/users.show.php">Profile</a></li>
         <li><a href="/auth.logout.php">Logout</a></li>
 
